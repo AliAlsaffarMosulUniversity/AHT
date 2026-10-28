@@ -1,0 +1,977 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>رحلة الاجتماعيات</title>
+<meta name="description" content="تطبيق تعليمي لمادة الاجتماعيات للصف الخامس الابتدائي: ملخصات وبطاقات كلمات واختبارات.">
+<meta name="theme-color" content="#7B1E2B">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@600;700;800&family=Tajawal:wght@400;500;700&display=swap">
+<style>
+/* Layout: an explorer's graph-paper notebook — one column, each unit its own ink colour */
+:root{
+  --bg:#F8F2E7; --grid:rgba(123,30,43,.05); --paper:#FFFCF6; --ink:#24171A; --muted:#4F4042; --line:#E6DAC6;
+  --btn:#7B1E2B; --btn-hi:#5E1520; --btn-ink:#FFFFFF; --btn-soft:#F3E3E0; --on-c:#FFFFFF;
+  --u1:#2E7D3E; --u1s:#E8F1E1;  /* الجغرافية */
+  --u2:#9A4A22; --u2s:#F6E6DA;  /* التاريخ */
+  --u3:#1F5F9E; --u3s:#E3ECF2;  /* التربية الوطنية */
+  --u4:#A66300; --u4s:#F8EAD2;  /* القوة والطاقة */
+  --u5:#1F5F9E; --u5s:#E3ECF2;  /* الأرض والكون */
+  --ok:#1E7A3C; --oks:#E1F1E0; --bad:#B3261E; --bads:#F8E0DC; --gold:#D99A00;
+  --display:"Baloo Bhaijaan 2","Tajawal",system-ui,sans-serif;
+  --body:"Tajawal","Segoe UI",Tahoma,system-ui,sans-serif;
+  --shadow:0 2px 0 rgba(80,40,30,.08);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#1A1415; --grid:rgba(255,230,210,.035); --paper:#251C1E; --ink:#F7EEE3; --muted:#D6C7BC; --line:#3F3033;
+  --btn:#A8394A; --btn-hi:#C04A5C; --btn-ink:#FFFFFF; --btn-soft:#3A2227; --on-c:#1A1415;
+  --u1:#7CC98A; --u1s:#22302A; --u2:#F0A070; --u2s:#3A2A22; --u3:#7FB4EA; --u3s:#1F2B38;
+  --u4:#F0B460; --u4s:#382C1D; --u5:#7FB4EA; --u5s:#1F2B38;
+  --ok:#6FD38E; --oks:#1E3326; --bad:#FF8A80; --bads:#3F2226; --gold:#FFC93A; --shadow:0 2px 0 rgba(0,0,0,.4); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#1A1415; --grid:rgba(255,230,210,.035); --paper:#251C1E; --ink:#F7EEE3; --muted:#D6C7BC; --line:#3F3033;
+  --btn:#A8394A; --btn-hi:#C04A5C; --btn-ink:#FFFFFF; --btn-soft:#3A2227; --on-c:#1A1415;
+  --u1:#7CC98A; --u1s:#22302A; --u2:#F0A070; --u2s:#3A2A22; --u3:#7FB4EA; --u3s:#1F2B38;
+  --u4:#F0B460; --u4s:#382C1D; --u5:#7FB4EA; --u5s:#1F2B38;
+  --ok:#6FD38E; --oks:#1E3326; --bad:#FF8A80; --bads:#3F2226; --gold:#FFC93A; --shadow:0 2px 0 rgba(0,0,0,.4); color-scheme:dark}
+
+*{box-sizing:border-box}
+html,body{min-height:100%}
+body{direction:rtl;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.75;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:26px 26px;}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+button:focus-visible{outline:3px solid var(--c,var(--u5));outline-offset:3px;border-radius:14px}
+h1,h2,h3{font-family:var(--display);line-height:1.25;text-wrap:balance;margin:0}
+
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);border-bottom:2px solid var(--line);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:10px}
+.bar-in{max-width:760px;margin:0 auto;display:flex;align-items:center;gap:12px}
+.logo{width:42px;height:42px;flex:none}
+.bar h1{font-size:1.3rem;flex:1;min-width:0}
+.bar h1 small{display:block;font-family:var(--body);font-size:.8rem;color:var(--muted);font-weight:500;line-height:1.3}
+.starpill{display:flex;align-items:center;gap:6px;background:var(--bg);border:2px solid var(--line);border-radius:999px;padding:2px 12px;font-family:var(--display);font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap}
+.starpill b{color:var(--gold)}
+.back{display:flex;align-items:center;gap:6px;font-family:var(--display);font-weight:700;padding:6px 12px;border-radius:12px;background:var(--bg);border:2px solid var(--line)}
+
+main{max-width:760px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 48px;display:flex;flex-direction:column;gap:22px}
+
+/* home */
+.hello{background:var(--paper);border:2px solid var(--line);border-radius:22px;padding:18px 20px;display:flex;gap:16px;align-items:center;box-shadow:var(--shadow)}
+.hello .big{font-size:2.6rem;line-height:1}
+.hello h2{font-size:1.45rem}
+.hello p{margin:2px 0 0;color:var(--muted);font-size:1rem}
+.meter{height:12px;background:var(--bg);border-radius:99px;overflow:hidden;margin-top:10px;border:1px solid var(--line)}
+.meter i{display:block;height:100%;background:linear-gradient(90deg,var(--u1),var(--u5),var(--u3));border-radius:99px;transition:width .5s}
+
+.unit{display:flex;flex-direction:column;gap:10px}
+.unit-h{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.unit-h .tag{font-family:var(--display);font-weight:800;color:var(--on-c);background:var(--c);padding:0 12px;border-radius:10px;font-size:.95rem}
+.unit-h h2{font-size:1.35rem;color:var(--c)}
+.chs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:520px){.chs{grid-template-columns:1fr}}
+.ch{display:flex;gap:14px;align-items:center;text-align:right;background:var(--paper);border:2px solid var(--line);border-bottom:5px solid var(--c);border-radius:20px;padding:14px;transition:transform .15s}
+.ch:hover{transform:translateY(-2px)}
+.ch .em{flex:none;width:58px;height:58px;border-radius:18px;background:var(--cs);display:grid;place-items:center;font-size:1.9rem}
+.ch .tx{min-width:0;flex:1}
+.ch .no{font-size:.82rem;color:var(--c);font-weight:700}
+.ch h3{font-size:1.12rem}
+.stars{display:flex;gap:2px;font-size:1rem;margin-top:2px;letter-spacing:1px}
+.stars .on{color:var(--gold)} .stars .off{color:var(--line)}
+
+.challenge{display:flex;align-items:center;gap:14px;background:var(--ink);color:var(--paper);border-radius:22px;padding:18px 20px;text-align:right}
+.challenge .em{font-size:2.2rem}
+.challenge h3{font-size:1.25rem}
+.challenge p{margin:0;opacity:.8;font-size:.95rem}
+.challenge .go{margin-inline-start:auto;font-family:var(--display);font-weight:800;background:var(--gold);color:#1B1B1B;border-radius:14px;padding:6px 16px;white-space:nowrap}
+
+/* chapter */
+.hero{background:var(--c);color:var(--on-c);border-radius:24px;padding:20px;display:flex;gap:16px;align-items:center;position:relative;overflow:hidden}
+.hero .em{flex:none;width:72px;height:72px;border-radius:22px;background:rgba(255,255,255,.22);display:grid;place-items:center;font-size:2.4rem}
+.hero .no{font-size:.9rem;opacity:.9;font-weight:700}
+.hero h2{font-size:1.6rem}
+.hero::after{content:"";position:absolute;inset:auto -30px -50px auto;width:150px;height:150px;border-radius:50%;border:18px solid rgba(255,255,255,.12)}
+
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;background:var(--paper);border:2px solid var(--line);border-radius:18px;padding:6px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 66px);z-index:4}
+.tab{font-family:var(--display);font-weight:700;font-size:1.02rem;padding:8px 4px;border-radius:13px;color:var(--muted);display:flex;flex-direction:column;align-items:center;line-height:1.3}
+.tab .ic{font-size:1.25rem}
+.tab[aria-selected="true"]{background:var(--c);color:var(--on-c)}
+
+.lesson{background:var(--paper);border:2px solid var(--line);border-radius:22px;padding:18px;display:flex;flex-direction:column;gap:12px}
+.lesson-h{display:flex;align-items:center;gap:10px}
+.lesson-h .n{flex:none;font-family:var(--display);font-weight:800;color:var(--c);background:var(--cs);border-radius:12px;padding:0 12px;font-size:.95rem}
+.lesson-h h3{font-size:1.3rem}
+.idea{background:var(--cs);border-radius:16px;padding:12px 14px;font-weight:500}
+.idea b.lb{display:block;font-family:var(--display);color:var(--c);font-size:.95rem}
+.pts{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.pts li{display:flex;gap:10px;align-items:flex-start}
+.pts li::before{content:"";flex:none;width:12px;height:12px;border-radius:4px;background:var(--c);margin-top:.6em;transform:rotate(45deg)}
+.pts b{color:var(--c)}
+.fact{border:2px dashed var(--c);border-radius:16px;padding:10px 14px;font-size:1rem}
+.fact b.lb{font-family:var(--display);color:var(--c)}
+.cta{display:flex;justify-content:center}
+.btn{font-family:var(--display);font-weight:800;font-size:1.1rem;background:var(--c);color:var(--on-c);border-radius:16px;padding:10px 22px;box-shadow:0 4px 0 rgba(0,0,0,.18)}
+.btn:active{transform:translateY(2px);box-shadow:0 2px 0 rgba(0,0,0,.18)}
+.btn.ghost{background:var(--paper);color:var(--c);border:2px solid var(--c);box-shadow:none}
+
+/* flashcards */
+.fc-wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
+.fc-hint{color:var(--muted);font-size:.95rem;margin:0}
+.fc{width:100%;max-width:440px;aspect-ratio:4/3;perspective:1200px}
+.fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.fc.flip .fc-in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center;gap:8px}
+.front{background:var(--paper);border:3px solid var(--c);box-shadow:0 6px 0 var(--c)}
+.front .w{font-family:var(--display);font-weight:800;font-size:2rem;color:var(--c);line-height:1.3}
+.front .s{color:var(--muted);font-size:.9rem}
+.back-f{background:var(--c);color:var(--on-c);transform:rotateY(180deg);font-size:1.2rem;font-weight:500;line-height:1.7}
+.fc-nav{display:flex;gap:10px;align-items:center}
+.fc-count{font-family:var(--display);font-weight:800;min-width:70px;text-align:center;font-variant-numeric:tabular-nums}
+
+/* quiz */
+.qbox{background:var(--paper);border:2px solid var(--line);border-radius:22px;padding:18px;display:flex;flex-direction:column;gap:14px}
+.qtop{display:flex;justify-content:space-between;align-items:center;font-family:var(--display);font-weight:700;color:var(--muted);font-variant-numeric:tabular-nums}
+.qtop .sc{color:var(--c)}
+.qbar{height:10px;border-radius:99px;background:var(--bg);overflow:hidden;border:1px solid var(--line)}
+.qbar i{display:block;height:100%;background:var(--c);transition:width .3s}
+.q{font-family:var(--display);font-size:1.35rem;font-weight:700;line-height:1.5}
+.opts{display:grid;gap:10px}
+.opt{display:flex;align-items:center;gap:12px;text-align:right;border:2px solid var(--line);border-radius:16px;padding:10px 14px;background:var(--paper);font-size:1.08rem;font-weight:500;transition:border-color .15s,background .15s}
+.opt .k{flex:none;width:34px;height:34px;border-radius:11px;background:var(--cs);color:var(--c);font-family:var(--display);font-weight:800;display:grid;place-items:center}
+.opt:not([disabled]):hover{border-color:var(--c)}
+.opt.right{border-color:var(--ok);background:var(--oks)} .opt.right .k{background:var(--ok);color:var(--on-c)}
+.opt.wrong{border-color:var(--bad);background:var(--bads)} .opt.wrong .k{background:var(--bad);color:var(--on-c)}
+.opt[disabled]{cursor:default}
+.fb{border-radius:16px;padding:12px 14px;font-size:1.02rem}
+.fb.good{background:var(--oks)} .fb.bad{background:var(--bads)}
+.fb b{font-family:var(--display);font-size:1.15rem;display:block}
+.qnext{display:flex;justify-content:flex-start}
+
+.result{text-align:center;align-items:center}
+.result .big{font-size:3.4rem;line-height:1}
+.result h3{font-size:1.6rem}
+.result .rs{font-size:2.2rem;letter-spacing:6px}
+.result .rs .on{color:var(--gold)} .result .rs .off{color:var(--line)}
+.result .num{font-family:var(--display);font-weight:800;font-size:1.25rem;color:var(--c);font-variant-numeric:tabular-nums}
+.row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.review{text-align:right;width:100%;display:flex;flex-direction:column;gap:8px}
+.review h4{font-family:var(--display);margin:0;font-size:1.1rem}
+.rv{border-inline-start:5px solid var(--bad);background:var(--bg);border-radius:12px;padding:8px 12px;font-size:1rem}
+.rv .a{color:var(--ok);font-weight:700}
+
+.foot{text-align:center;color:var(--muted);font-size:.85rem}
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:20;overflow:hidden}
+.confetti i{position:absolute;top:-20px;width:10px;height:14px;border-radius:3px;animation:fall 1.8s ease-in forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(540deg);opacity:.6}}
+.pop{animation:pop .35s ease}
+@keyframes pop{0%{transform:scale(.96)}60%{transform:scale(1.02)}100%{transform:scale(1)}}
+/* milky + maroon theme: clear text, maroon controls */
+body{font-size:19px;font-weight:500;line-height:1.85}
+.pts li,.idea,.fact,.opt,.fb,.rv{color:var(--ink)}
+.hello p,.fc-hint,.qtop,.foot{color:var(--muted)}
+.btn{background:var(--btn);color:var(--btn-ink)}
+.btn:hover{background:var(--btn-hi)}
+.btn.ghost{background:var(--paper);color:var(--btn);border:2px solid var(--btn)}
+.btn.ghost:hover{background:var(--btn-soft)}
+.back,.themebtn{background:var(--btn);color:var(--btn-ink);border:0}
+.themebtn{flex:none;width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-size:1.25rem}
+.tab[aria-selected="true"]{background:var(--btn);color:var(--btn-ink)}
+.opt:not([disabled]):hover{border-color:var(--btn)}
+.opt .k{background:var(--btn-soft);color:var(--btn)}
+.qbar i{background:var(--btn)}
+.qtop .sc,.result .num{color:var(--btn)}
+.challenge{background:var(--btn);color:var(--btn-ink)}
+.challenge .go{background:var(--paper);color:var(--btn)}
+.hero.chal{background:var(--btn);color:var(--btn-ink)}
+.meter i{background:var(--btn)}
+button:focus-visible{outline-color:var(--btn)}
+/* book figures */
+.figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.fig{margin:0;background:#FFFFFF;border:2px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;cursor:zoom-in;padding:0;text-align:right}
+.fig img{display:block;width:100%;height:180px;object-fit:contain;background:#FFFFFF;padding:6px}
+.fig.wide{grid-column:1/-1} .fig.wide img{height:auto;max-height:340px}
+.fig figcaption{background:var(--paper);border-top:2px solid var(--line);padding:6px 12px;font-size:.95rem;color:var(--ink);font-weight:500;line-height:1.5}
+.lbox{position:fixed;inset:0;z-index:30;background:rgba(20,10,12,.88);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;
+  padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.lbox img{max-width:100%;max-height:78vh;background:#FFFFFF;border-radius:14px}
+.lbox p{color:#FFFFFF;font-family:var(--display);font-size:1.2rem;margin:0;text-align:center}
+.lbox button{font-family:var(--display);font-weight:800;background:var(--btn);color:#FFFFFF;border-radius:14px;padding:6px 18px}
+/* install */
+.installcard{display:flex;align-items:center;gap:14px;background:var(--paper);border:2px dashed var(--btn);border-radius:22px;padding:14px 18px}
+.installcard .em{font-size:2.2rem;line-height:1}
+.installcard h3{font-size:1.15rem}
+.installcard p{margin:0;color:var(--muted);font-size:.95rem}
+.installcard .btn{margin-inline-start:auto;white-space:nowrap}
+@media (max-width:520px){.installcard{flex-wrap:wrap}.installcard .btn{width:100%}}
+.sheet{position:fixed;inset:0;z-index:30;background:rgba(20,10,12,.6);display:flex;align-items:flex-end;justify-content:center}
+.sheet-in{background:var(--paper);color:var(--ink);width:100%;max-width:560px;max-height:88vh;overflow:auto;border-radius:24px 24px 0 0;
+  padding-block:20px calc(20px + env(safe-area-inset-bottom,0px));padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:12px}
+@media (min-width:700px){.sheet{align-items:center}.sheet-in{border-radius:24px}}
+.sheet h3{font-size:1.35rem}
+.steps{margin:0;padding-inline-start:1.4em;display:flex;flex-direction:column;gap:8px}
+.steps .en{display:block;direction:ltr;text-align:right;font-family:system-ui,sans-serif;font-weight:700;color:var(--btn);font-size:.95rem}
+.sheet details{border:2px solid var(--line);border-radius:14px;padding:8px 12px}
+.sheet summary{font-family:var(--display);font-weight:700;cursor:pointer}
+.siteurl{direction:ltr;text-align:center;background:var(--bg);border:2px solid var(--line);border-radius:12px;padding:8px;font-family:system-ui,sans-serif;font-size:.9rem;word-break:break-all;user-select:all}
+/* visitors */
+.visits{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.vchip{display:flex;align-items:center;gap:8px;background:var(--paper);border:2px solid var(--line);border-radius:999px;padding:4px 16px;font-family:var(--display);font-weight:700}
+.vchip b{color:var(--btn);font-variant-numeric:tabular-nums;font-size:1.15rem}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media (max-width:480px){.bar h1{font-size:1rem;line-height:1.2;white-space:nowrap}.back{padding:4px 9px;font-size:.92rem}.starpill{font-size:.88rem}.logo{width:36px;height:36px}.bar h1 .w1{display:none}.bar h1 small{display:none}.bar-in{gap:8px}.starpill{padding:2px 7px}.themebtn{width:38px;height:38px}}
+</style>
+
+</head>
+<body>
+<header class="bar"><div class="bar-in" id="bar"></div></header>
+<main id="app"></main>
+
+<script>
+const UNITS=[
+ {n:"الوحدة الأولى",t:"جغرافية وطننا العراق",k:"u1"},
+ {n:"الوحدة الثانية",t:"تاريخنا.. حضارتنا.. هويتنا",k:"u2"},
+ {n:"الوحدة الثالثة",t:"التربية الوطنية والاجتماعية",k:"u3"}];
+
+const TF=["صح","خطأ"],FT=["خطأ","صح"];
+
+const CH=[
+{u:0,no:"الفصل الأول",t:"موقع وطننا العراق",e:"🧭",
+lessons:[
+ {t:"الموقع الجغرافي والتقسيمات الإدارية",idea:"وطننا العراق دولة عربية تقع في الجزء الجنوبي الغربي من قارة آسيا، ويحتل الجزء الشمالي الشرقي من الوطن العربي.",
+  pts:["يحد العراق: **تركيا** من الشمال، و**إيران** من الشرق، و**سوريا والأردن** من الغرب، و**الخليج العربي والكويت والسعودية** من الجنوب.","**أهمية موقعه**: يقع في قلب العالم، وهو حلقة الوصل بين قارات العالم القديم: **آسيا وأفريقيا وأوروبا**.","كان العراق قديماً وحديثاً **معبراً لطرق النقل والتجارة الدولية**.","يتكون العراق من **ثماني عشرة (18) محافظة**، وكل محافظة تتكون من أقضية ونواحٍ عدة.","**المحافظة**: منطقة جغرافية من وطننا، وحدة إدارية تضم عدداً من الأقضية والنواحي والقرى، وهي **أكبر** وحدة إدارية.","**القضاء والناحية**: مناطق إدارية أصغر تتبع المحافظة، و**الناحية** أصغر وحدة في التنظيم الإداري.","تختلف المحافظات في موقعها ومساحتها وطبيعة سطحها وعدد سكانها ونشاطها الاقتصادي، فمنها في الشمال ومنها في الوسط أو الجنوب أو الغرب أو الشرق.","مساحة المحافظة وحدودها **قابلة للتغيير** بالاتساع أو التقلص وفق التقسيمات الإدارية والتطورات الحضرية."],
+  fact:"رغم تنوع البيئة الجغرافية وتنوع العادات والتقاليد تبقى هويتنا واحدة: إننا مواطنون عراقيون نفخر ببلدنا ونعتز بتراثه العريق."},
+ {t:"الموقع الفلكي والعراق بين الدول العربية",idea:"يحدد الجغرافيون موقع أي مكان على سطح الأرض بشبكة وهمية من خطوط الطول ودوائر العرض، وموقع العراق عليها يسمى الموقع الفلكي.",
+  pts:["**خطوط الطول**: خطوط عمودية على شكل أنصاف دوائر، عددها **360** خطاً، يستفاد منها في **تحديد التوقيتات** بين الدول.","**دوائر العرض**: خطوط على شكل دوائر، عددها **180** دائرة، يستفاد منها في **تحديد نوع المناخ** بين دول العالم.","يقع العراق بين خطي طول **(38° – 48°) شرقاً**، أي أنه يقع **شرق خط كرينتش**.","ويقع بين دائرتي عرض **(29° – 37°) شمالاً**، أي أنه يقع **شمال خط الاستواء**.","**خط كرينتش**: خط الطول الرئيس الذي تُحسب منه خطوط الطول شرقاً وغرباً، وله أهمية في تحديد الوقت.","تقسم الدول العربية إلى مجموعتين: دول في **قارة آسيا** (ملونة بالأخضر على الخريطة) ودول في **قارة أفريقيا** (ملونة بالأصفر).","ينتمي العراق إلى مجموعة **الدول العربية الآسيوية**.","يطل العراق على **الخليج العربي** من خلال محافظة **البصرة**، وهو منفذه البحري من جهة الجنوب."],
+  fact:"خط الاستواء هو أطول دوائر العرض، ويقسم الكرة الأرضية إلى نصفين: شمالي وجنوبي."}],
+vocab:[["الموقع الجغرافي","مكان العراق بالنسبة إلى القارات والدول المجاورة"],["المحافظة","وحدة إدارية تضم أقضية ونواحي وقرى، وهي الأكبر"],["القضاء","منطقة إدارية صغيرة تتبع المحافظة"],["الناحية","أصغر وحدة في التنظيم الإداري"],["خطوط الطول","360 خطاً عمودياً، تحدد التوقيتات"],["دوائر العرض","180 دائرة، تحدد نوع المناخ"],["الموقع الفلكي","موقع العراق بين خطوط الطول ودوائر العرض"],["خط كرينتش","خط الطول الرئيس، والعراق يقع شرقه"],["خط الاستواء","الدائرة التي تقسم الأرض إلى شمالي وجنوبي"],["الخليج العربي","المنفذ البحري للعراق من الجنوب"]],
+quiz:[
+ ["يقع وطننا العراق في قارة:",["آسيا","أفريقيا","أوروبا","أستراليا"],"يقع في الجزء الجنوبي الغربي من قارة آسيا."],
+ ["يقع العراق في أي جزء من قارة آسيا؟",["الجنوبي الغربي","الشمالي الشرقي","الجنوبي الشرقي","الشمالي الغربي"],"ويحتل الجزء الشمالي الشرقي من الوطن العربي."],
+ ["يحتل العراق من الوطن العربي الجزء:",["الشمالي الشرقي","الجنوبي الغربي","الغربي","الجنوبي"],"لاحظ موقعه على خريطة الدول العربية."],
+ ["الدولة التي تحد العراق من الشمال:",["تركيا","إيران","سوريا","الكويت"],"وتحده إيران من الشرق."],
+ ["الدولة التي تحد العراق من الشرق:",["إيران","تركيا","الأردن","السعودية"],"إيران دولة جارة من جهة الشرق."],
+ ["يحد العراق من الغرب:",["سوريا والأردن","إيران وتركيا","الكويت وإيران","مصر وليبيا"],"سوريا والأردن من جهة الغرب."],
+ ["يحد العراق من الجنوب:",["الخليج العربي والكويت والسعودية","تركيا","سوريا والأردن","إيران فقط"],"ومن جهة الجنوب منفذه البحري."],
+ ["المنفذ البحري الذي يطل عليه العراق من الجنوب:",["الخليج العربي","البحر المتوسط","البحر الأحمر","المحيط الأطلسي"],"يطل عليه من خلال محافظة البصرة."],
+ ["يطل العراق على الخليج العربي من خلال محافظة:",["البصرة","ميسان","ذي قار","المثنى"],"البصرة في أقصى جنوب العراق."],
+ ["يعد العراق حلقة الوصل بين قارات العالم القديم:",["آسيا وأفريقيا وأوروبا","أمريكا وأوروبا","أستراليا وآسيا","أفريقيا وأمريكا"],"لأنه يقع في قلب العالم."],
+ ["كان العراق قديماً وحديثاً معبراً لـ:",["طرق النقل والتجارة الدولية","الأنهار الجليدية","الرياح القطبية","الطيور المهاجرة فقط"],"وهذه من أهمية موقعه."],
+ ["كم عدد محافظات العراق؟",["18","15","12","20"],"ثماني عشرة محافظة."],
+ ["أصغر وحدة في التنظيم الإداري هي:",["الناحية","القضاء","المحافظة","الدولة"],"وأكبرها المحافظة."],
+ ["أكبر وحدة في التنظيم الإداري هي:",["المحافظة","الناحية","القضاء","القرية"],"المحافظة تضم الأقضية والنواحي."],
+ ["تضم المحافظة عدداً من:",["الأقضية والنواحي والقرى","الدول","القارات","المحيطات"],"المحافظة منطقة جغرافية من وطننا."],
+ ["مساحة المحافظة وحدودها ثابتة ولا تتغير أبداً.",FT,"هي قابلة للتغيير بالاتساع أو التقلص."],
+ ["يجاور العراق إيران من جهة الشرق.",TF,"إيران تحد العراق من الشرق."],
+ ["ينتمي العراق إلى الدول العربية في الجانب الأفريقي.",FT,"العراق دولة عربية آسيوية."],
+ ["تختلف محافظات العراق في:",["الموقع والمساحة وعدد السكان","العلم الوطني","النشيد الوطني","العملة الوطنية"],"لكل محافظة موقع ومميزات تختلف عن غيرها."],
+ ["عدد خطوط الطول:",["360","180","90","100"],"وعدد دوائر العرض 180."],
+ ["عدد دوائر العرض:",["180","360","48","37"],"وعدد خطوط الطول 360."],
+ ["يستفاد من خطوط الطول في:",["تحديد التوقيتات بين الدول","تحديد نوع المناخ","قياس الأمطار","رسم حدود المحافظات"],"أما دوائر العرض فتحدد المناخ."],
+ ["يستفاد من دوائر العرض في:",["تحديد نوع المناخ بين دول العالم","تحديد التوقيتات","قياس عمق البحار","تسمية المدن"],"وخطوط الطول تحدد التوقيتات."],
+ ["نستفيد من دوائر العرض في تحديد الاتجاهات.",FT,"نستفيد منها في تحديد نوع المناخ."],
+ ["الخطوط العمودية التي على شكل أنصاف دوائر تسمى:",["خطوط الطول","دوائر العرض","خط الاستواء","الحدود الدولية"],"أما دوائر العرض فهي على شكل دوائر."],
+ ["يمتد العراق بين خطي طول:",["38° – 48° شرقاً","29° – 37° شرقاً","10° – 20° غرباً","50° – 60° شرقاً"],"أي أنه يقع شرق خط كرينتش."],
+ ["يمتد العراق بين دائرتي عرض:",["29° – 37° شمالاً","38° – 48° شمالاً","29° – 37° جنوباً","0° – 10° شمالاً"],"أي أنه يقع شمال خط الاستواء."],
+ ["يمتد العراق بين خطي طول 38° – 48° شرقاً.",TF,"هذا جزء من موقعه الفلكي."],
+ ["وقوع العراق بين خطوط الطول ودوائر العرض يسمى:",["الموقع الفلكي","الموقع الإداري","الموقع التجاري","الموقع المائي"],"الموقع الفلكي يحدد بشبكة الخطوط الوهمية."],
+ ["يقع العراق بالنسبة لخط كرينتش:",["شرقه","غربه","عليه تماماً","جنوبه"],"لأنه بين خطي طول شرقيين."],
+ ["يقع العراق بالنسبة لخط الاستواء:",["شماله","جنوبه","عليه تماماً","شرقه"],"لأنه بين دائرتي عرض شماليتين."],
+ ["ينتمي العراق إلى مجموعة الدول العربية:",["الآسيوية","الأفريقية","الأوروبية","الأمريكية"],"وهي الملونة بالأخضر على الخريطة."],
+ ["على خريطة الدول العربية، تُلوّن الدول العربية الآسيوية باللون:",["الأخضر","الأصفر","الأزرق","الأحمر"],"والدول الأفريقية باللون الأصفر."],
+ ["من الدول العربية في قارة أفريقيا:",["مصر","الكويت","الأردن","سوريا"],"مصر في الجانب الأفريقي."],
+ ["دولة عربية آسيوية لها حدود مشتركة مع العراق:",["الكويت","لبنان","اليمن","قطر"],"الكويت تجاور العراق من الجنوب."],
+ ["لبنان دولة عربية آسيوية ليست لها حدود مع العراق.",TF,"لبنان في آسيا لكنه لا يجاور العراق."],
+ ["مرقد الإمام العباس (عليه السلام) من المعالم الدينية في محافظة:",["كربلاء المقدسة","البصرة","نينوى","الأنبار"],"من صور معالم العراق الدينية."],
+ ["شارع المتنبي من المعالم الثقافية في:",["بغداد","البصرة","الموصل","الحلة"],"شارع المتنبي شارع الكتب في بغداد."],
+ ["أسد بابل من آثار محافظة:",["بابل","أربيل","ذي قار","الأنبار"],"من صور العراق في الكتاب."],
+ ["شلال كلي علي بيك من المعالم السياحية في:",["شمال العراق","جنوب العراق","الهضبة الغربية","الأهوار"],"المنطقة الجبلية غنية بالشلالات."],
+ ["رغم تنوع البيئة والعادات والتقاليد تبقى هويتنا العراقية واحدة.",TF,"نحن مواطنون عراقيون نفخر ببلدنا."]]},
+
+{u:0,no:"الفصل الثاني",t:"الظواهر الطبيعية للعراق",e:"⛰️",
+lessons:[
+ {t:"السطح (التضاريس)",idea:"لوطننا العراق امتداد كبير بين الشمال والجنوب والشرق والغرب، لذلك تنوعت ظواهر سطحه بين جبال وسهول وهضاب ووديان.",
+  pts:["تقسم تضاريس العراق إلى أربعة أقسام: **المنطقة الجبلية، المنطقة المتموجة، السهل الرسوبي، الهضبة الغربية**.","**المنطقة الجبلية**: في الشمال الشرقي، تشغل **6%** من مساحة العراق، تحدها تركيا وإيران، وتمتد سلاسلها من **الشمال الغربي إلى الجنوب الشرقي**.","أعلى سلسلة جبلية فيها **حصاروست**، وأعلى قممها **هلكرد** بارتفاع **3600 م**. ومن سهولها: **سهل السندي** في دهوك، و**رانية وشهرزور** في السليمانية.","**المنطقة المتموجة**: إلى الجنوب من الجبلية، تشغل **15%**، مرتفعاتها أقل ارتفاعاً، أهمها **حمرين ومكحول وسنجار**. ومن سهولها **مخمور وأربيل**، ومن هضابها **كركوك والموصل**.","**السهل الرسوبي**: في وسط العراق وجنوبه، يشغل **24%**، أهم المناطق لانبساط سطحه وخصوبة تربته ووفرة مياهه. فيه دجلة والفرات والبحيرات والأهوار، والنفط والغاز.","**الهضبة الغربية**: في غرب العراق، **أكبر المناطق مساحة (55%)**، طابعها **صحراوي**، وفيها **الفوسفات** وصخور تدخل في **صناعة الإسمنت والزجاج**.","تنتشر **الأهوار** في الأقسام الجنوبية من السهل الرسوبي، وهي مناطق سياحية وثروة اقتصادية من **الأسماك والطيور**.","تتميز المنطقة الجبلية بالشلالات والينابيع والجداول، لذلك اختيرت **أربيل عاصمة للسياحة العربية لعام 2014م**."],
+  fact:"على خريطة التضاريس: البني للمنطقة الجبلية، والبني الفاتح للمتموجة، والأخضر للسهل الرسوبي، والأصفر للهضبة الغربية."},
+ {t:"المناخ والنبات الطبيعي",idea:"أدى تنوع سطح العراق وامتداده إلى اختلاف مناخه، واختلاف المناخ والتضاريس أدى إلى تنوع النبات الطبيعي.",
+  pts:["**درجة الحرارة** من عناصر المناخ الرئيسة، وتكون **أكثر اعتدالاً في الصيف في المناطق الجبلية** مقارنة بالجنوب، بسبب الجبال العالية.","لذلك يسافر كثير من الناس صيفاً من الوسط والجنوب إلى **الشمال** للراحة والاستجمام.","**الأمطار** تتأثر بالتضاريس، فتزداد في **المناطق الجبلية**، ويقتصر سقوطها في العراق على **فصل الشتاء**.","الأقاليم المناخية ثلاثة: **مناخ البحر المتوسط** في الشمال، و**المناخ شبه الصحراوي (السهوب)**، و**المناخ الصحراوي الحار**.","**النبات الطبيعي**: النبات الذي ينمو **دون تدخل الإنسان** في إنباته.","**نباتات المناطق الجبلية**: غابات وأشجار، أهمها **البلوط واللوز والجوز والصنوبر**، وهي **أكثف** مناطق العراق إنباتاً لوفرة الأمطار واعتدال الحرارة.","**نباتات الحشائش القصيرة**: في المنطقة المتموجة وشرق السهل الرسوبي، وهي من أهم **مناطق الرعي**.","**نباتات ضفاف الأنهار**: قرب الأهوار والمستنقعات، أهمها **الصفصاف والقصب والبردي**.","**نباتات المنطقة الصحراوية**: في الهضبة الغربية، تتحمل الجفاف والحرارة، أهمها **الشوك والعاقول والصبار**.","**أهمية النبات الطبيعي**: يلطّف الجو، ويمنع انجراف التربة، ويدخل في الصناعات الغذائية والصناعية، ويعطي جمالاً للبيئة، ويستخدم لرعي الحيوانات."],
+  fact:"غزارة الأمطار في الشمال أدت إلى تنوع النبات الطبيعي هناك من أشجار وشجيرات."},
+ {t:"الموارد المائية",idea:"الماء المصدر الأساسي للحياة، وتتنوع مصادر المياه في العراق بين الأمطار والثلوج والمياه السطحية والمياه الجوفية.",
+  pts:["**الأمطار والثلوج**: يقتصر سقوطها على الشتاء، وتزداد كمياتها كلما اتجهنا نحو **الشمال والشمال الشرقي**.","**المياه السطحية**: تجري على سطح الأرض، مثل الأنهار والروافد والبحيرات وشط العرب والأهوار.","**المياه الجوفية**: مخزونة في باطن الأرض، وتخرج على شكل **آبار وعيون**.","**نهر دجلة**: ينبع من جنوب شرق تركيا، ويدخل العراق عند قرية **فيشخابور**. تصب فيه روافد من الجانب الأيسر: **الخابور والزاب الكبير والزاب الصغير والعظيم وديالى**.","**نهر الفرات**: ينبع من شرق تركيا، ويدخل العراق عند مدينة **حصيبة** في القائم بمحافظة **الأنبار**، ويجري باتجاه الجنوب الشرقي.","يلتقي دجلة والفرات في **القرنة** شمال البصرة ليكوّنا **شط العرب**، وطوله **190 كم** وعرضه **2 كم**.","من البحيرات: **الثرثار والحبانية والرزازة ودوكان**، وهي مناطق لخزن المياه وسياحية جميلة.","**مشاكل المياه**: عوامل **طبيعية** (قلة الأمطار وزيادة التبخر بسبب ارتفاع الحرارة)، وعوامل **بشرية** (إنشاء الدول المجاورة السدود على الأنهار).","**الحلول**: ترشيد الاستهلاك وعدم الإسراف، وعدم رمي النفايات في الأنهار، وعدم سقي الحدائق بمياه الشرب، واستخدام الوسائل الصحيحة في الري."],
+  fact:"الأهوار والمستنقعات في العراق تعد الآن من المحميات الطبيعية."}],
+vocab:[["التضاريس","ظواهر سطح الأرض من جبال وسهول وهضاب"],["المنطقة الجبلية","في الشمال الشرقي، تشغل 6%، أعلى قممها هلكرد"],["المنطقة المتموجة","تشغل 15%، من مرتفعاتها حمرين ومكحول"],["السهل الرسوبي","في الوسط والجنوب، يشغل 24%، أخصب المناطق"],["الهضبة الغربية","أكبر المناطق 55%، طابعها صحراوي"],["الأهوار","مسطحات مائية في جنوب السهل الرسوبي"],["الأقاليم المناخية","البحر المتوسط، شبه الصحراوي، الصحراوي الحار"],["النبات الطبيعي","نبات ينمو دون تدخل الإنسان في إنباته"],["المياه الجوفية","مياه مخزونة في باطن الأرض تخرج آباراً وعيوناً"],["شط العرب","يتكون من التقاء دجلة والفرات في القرنة"]],
+quiz:[
+ ["كم قسماً تضاريسياً في العراق؟",["أربعة","ثلاثة","خمسة","اثنان"],"الجبلية والمتموجة والسهل الرسوبي والهضبة الغربية."],
+ ["تقع المنطقة الجبلية في الجزء:",["الشمالي الشرقي","الجنوبي","الغربي","الأوسط"],"تحدها تركيا وإيران."],
+ ["تشغل المنطقة الجبلية من مساحة العراق:",["6%","15%","24%","55%"],"هي أصغر الأقسام مساحة."],
+ ["أعلى سلسلة جبلية في العراق:",["حصاروست","حمرين","مكحول","سنجار"],"وأعلى قممها هلكرد."],
+ ["أعلى قمة جبلية في العراق هي قمة:",["هلكرد","حمرين","سنجار","مكحول"],"يبلغ ارتفاعها 3600 م."],
+ ["يبلغ ارتفاع قمة هلكرد:",["3600 م","1000 م","500 م","8000 م"],"هي أعلى قمة في العراق."],
+ ["يمتد اتجاه السلاسل الجبلية في العراق من:",["الشمال الغربي إلى الجنوب الشرقي","الشرق إلى الغرب","الجنوب إلى الشمال","الغرب إلى الشرق"],"لاحظ خريطة التضاريس."],
+ ["أشهر سهول المنطقة الجبلية سهل السندي في محافظة:",["دهوك","البصرة","الأنبار","واسط"],"وسهلا رانية وشهرزور في السليمانية."],
+ ["تشغل المنطقة المتموجة من مساحة العراق:",["15%","6%","24%","55%"],"تقع إلى الجنوب من المنطقة الجبلية."],
+ ["من مرتفعات المنطقة المتموجة:",["حمرين ومكحول وسنجار","حصاروست وهلكرد","الثرثار والحبانية","دجلة والفرات"],"مرتفعاتها أقل ارتفاعاً من الجبلية."],
+ ["من سهول المنطقة المتموجة:",["مخمور وأربيل","السندي وشهرزور","القرنة","عكاشات"],"ومن هضابها كركوك والموصل."],
+ ["يقع السهل الرسوبي في:",["وسط العراق وجنوبه","شمال العراق","غرب العراق","شرق تركيا"],"بين المتموجة شمالاً والخليج العربي جنوباً."],
+ ["يشغل السهل الرسوبي من مساحة العراق:",["24%","55%","6%","15%"],"وهو من أهم المناطق التضاريسية."],
+ ["لماذا يعد السهل الرسوبي من أهم المناطق التضاريسية؟",["لانبساط سطحه وخصوبة تربته ووفرة مياهه","لأنه أعلى منطقة","لأنه صحراوي","لكثرة الجبال فيه"],"ويحتوي أيضاً على النفط والغاز."],
+ ["أكبر الأقسام التضاريسية مساحة:",["الهضبة الغربية","السهل الرسوبي","المنطقة الجبلية","المنطقة المتموجة"],"تشغل 55% من مساحة العراق."],
+ ["تشغل الهضبة الغربية من مساحة العراق:",["55%","24%","15%","6%"],"وهي أكبر المناطق مساحة."],
+ ["أهم ظاهرة طبيعية تتميز بها الهضبة الغربية:",["الطابع الصحراوي","الشلالات","الأهوار","الغابات"],"ولهذا نباتاتها صحراوية."],
+ ["تحتوي الهضبة الغربية على ثروات منها:",["الفوسفات","الغابات","الأهوار","الأسماك"],"وصخور تدخل في صناعة الإسمنت والزجاج."],
+ ["تنتشر الأهوار في الأقسام الشمالية من العراق.",FT,"تنتشر في الأقسام الجنوبية من السهل الرسوبي."],
+ ["يرمز اللون البني في خريطة التضاريس إلى المنطقة الجبلية.",TF,"والأصفر للهضبة الغربية."],
+ ["المنطقة المتموجة تقع إلى الشمال من المنطقة الجبلية.",FT,"تقع إلى الجنوب منها."],
+ ["الطابع الصحراوي من أهم الظواهر الطبيعية المميزة للهضبة الغربية.",TF,"الهضبة الغربية صحراوية."],
+ ["اختيرت مدينة أربيل عاصمة للسياحة العربية لعام:",["2014م","2013م","2005م","1958م"],"لجمال مناظرها الطبيعية."],
+ ["ثروة اقتصادية تتميز بها الأهوار:",["الأسماك والطيور","الفوسفات","الكبريت","الحديد"],"فضلاً عن كونها مناطق سياحية."],
+ ["تكون درجات الحرارة صيفاً أكثر اعتدالاً في:",["المناطق الجبلية الشمالية","المناطق الجنوبية","الهضبة الغربية","البادية"],"بسبب الجبال العالية."],
+ ["لماذا يسافر الناس صيفاً من الجنوب إلى الشمال؟",["لاعتدال المناخ فيه","لأنه أكثر حرارة","لقلة الأمطار","لأنه صحراوي"],"للراحة والاستجمام."],
+ ["يقتصر سقوط الأمطار في العراق على فصل:",["الشتاء","الصيف","الربيع فقط","الخريف فقط"],"الصيف في العراق جاف."],
+ ["تزداد كمية الأمطار في المناطق:",["الجبلية","الصحراوية","الجنوبية","الغربية"],"لأن التضاريس تؤثر في سقوط الأمطار."],
+ ["يتركز سقوط الأمطار في العراق في فصل الصيف.",FT,"يقتصر على فصل الشتاء."],
+ ["كم إقليماً مناخياً في العراق؟",["ثلاثة","اثنان","أربعة","خمسة"],"البحر المتوسط، شبه الصحراوي، الصحراوي الحار."],
+ ["إقليم مناخ البحر المتوسط في العراق يوجد في:",["الشمال","الجنوب","الغرب","الوسط"],"في المنطقة الجبلية."],
+ ["يسمى المناخ شبه الصحراوي أيضاً:",["السهوب","المتوسطي","القطبي","الاستوائي"],"وهو بين المتوسطي والصحراوي."],
+ ["النبات الطبيعي هو النبات الذي:",["ينمو دون تدخل الإنسان في إنباته","يزرعه الإنسان","يباع في الأسواق","ينمو داخل البيوت فقط"],"مثل نباتات الجبال والصحراء."],
+ ["كم قسماً للنبات الطبيعي في العراق؟",["أربعة","ثلاثة","اثنان","ستة"],"الجبلية، الحشائش القصيرة، ضفاف الأنهار، الصحراوية."],
+ ["أكثف مناطق العراق إنباتاً:",["المنطقة الجبلية","الهضبة الغربية","البادية","الأهوار"],"لوفرة الأمطار واعتدال الحرارة."],
+ ["من أهم نباتات المناطق الجبلية:",["البلوط واللوز والجوز والصنوبر","العاقول والصبار","القصب والبردي","الشوك"],"وهي غابات وأشجار."],
+ ["من أهم نباتات ضفاف الأنهار:",["الصفصاف والقصب والبردي","البلوط والصنوبر","العاقول والشوك","اللوز والجوز"],"تتواجد قرب الأهوار والمستنقعات."],
+ ["من نباتات المنطقة الصحراوية:",["الشوك والعاقول والصبار","البلوط","الصفصاف","الجوز"],"تتحمل قلة الأمطار والحرارة المرتفعة."],
+ ["تعد منطقة الحشائش القصيرة من أهم مناطق:",["الرعي","التعدين","الصيد البحري","الصناعة"],"لتنوع نباتاتها الطبيعية."],
+ ["من أهمية النبات الطبيعي:",["يمنع انجراف التربة","يرفع درجة الحرارة","يلوث الهواء","يقلل الأمطار"],"ويلطف الجو ويعطي جمالاً للبيئة."],
+ ["المياه المخزونة في باطن الأرض وتخرج على شكل آبار وعيون:",["المياه الجوفية","المياه السطحية","الأمطار","الثلوج"],"أما السطحية فتجري على سطح الأرض."],
+ ["تشمل مصادر المياه في العراق:",["الأمطار والثلوج والمياه السطحية والجوفية","الأنهار فقط","البحار فقط","الآبار فقط"],"أربعة مصادر."],
+ ["ينبع نهر دجلة من:",["جنوب شرق تركيا","إيران","سوريا","السعودية"],"ويدخل العراق عند قرية فيشخابور."],
+ ["يدخل نهر دجلة الأراضي العراقية عند قرية:",["فيشخابور","حصيبة","القرنة","القائم"],"في أقصى الشمال."],
+ ["من روافد نهر دجلة:",["الزاب الكبير والزاب الصغير","الفرات","شط العرب","الثرثار"],"والخابور والعظيم وديالى."],
+ ["يدخل نهر الفرات العراق عند مدينة حصيبة في محافظة:",["الأنبار","نينوى","البصرة","ديالى"],"في القائم."],
+ ["يلتقي دجلة والفرات في القرنة ليكونا:",["شط العرب","بحيرة الثرثار","الزاب الكبير","الخليج العربي"],"شمال مدينة البصرة."],
+ ["طول شط العرب:",["190 كم","2 كم","500 كم","19 كم"],"وعرضه نحو 2 كم."],
+ ["من البحيرات في العراق:",["الثرثار والحبانية والرزازة ودوكان","هلكرد وحصاروست","عكاشات والمشراق","فيشخابور"],"وهي مناطق لخزن المياه."],
+ ["من الأسباب البشرية لمشاكل المياه في العراق:",["إنشاء الدول المجاورة السدود على الأنهار","قلة الأمطار","ارتفاع الحرارة","زيادة التبخر"],"أما قلة الأمطار فسبب طبيعي."],
+ ["من الحلول للمحافظة على المياه:",["ترشيد الاستهلاك وعدم الإسراف","سقي الحدائق بمياه الشرب","رمي النفايات في الأنهار","ترك الصنبور مفتوحاً"],"الماء نعمة يجب المحافظة عليها."],
+ ["غسل السيارات بالمياه الصالحة للشرب سلوك صحيح.",FT,"يجب ترشيد استهلاك مياه الشرب."]]},
+
+{u:0,no:"الفصل الثالث",t:"الظواهر البشرية والنشاط الاقتصادي",e:"🌾",
+lessons:[
+ {t:"السكان والزراعة والثروة الحيوانية",idea:"لا يتوزع سكان العراق بالتساوي على جميع مناطقه، بل يتركزون في السهول وضفاف الأنهار، ولا سيما السهل الرسوبي.",
+  pts:["**توزيع السكان**: توزيع عدد السكان على مناطق العراق، وتؤثر فيه عوامل طبيعية وأخرى بشرية.","**زيادة الولادات والهجرة** من أهم أسباب الزيادة السكانية، فعدد السكان متغير.","يتركز السكان في **السهل الرسوبي** لانبساط أرضه وملاءمتها للزراعة ووجود المصادر المائية والثروات الاقتصادية.","**الزراعة** لها مكانة مهمة: توفر **المواد الغذائية** للسكان، و**المواد الأولية** التي تدخل في الصناعة.","أغلب أراضي العراق تصلح للزراعة إذا توافرت المياه والتربة الخصبة.","أهم المحاصيل: **القمح والشعير، الرز، الذرة، التمور، القطن، التبغ، قصب السكر، الفواكه والخضروات**.","**الثروة الحيوانية** توفر الغذاء كاللحوم والحليب والبيض، وتدخل في **الصناعات الجلدية والأسمدة**.","تتكون من **الأغنام والأبقار والماعز والجاموس والجمال وحيوانات الركوب والدواجن والأسماك**، وتنتشر في جميع المحافظات."],
+  fact:"على خريطة الكثافة السكانية، تظهر بغداد أكثر المناطق كثافة بالسكان."},
+ {t:"النفط والموارد المعدنية والصناعة",idea:"يحتوي وطننا العراق على موارد معدنية كثيرة تتوزع على أراضيه، أهمها النفط، ويتوافر فيه ما تحتاجه الصناعة.",
+  pts:["يحتل العراق **مرتبة متقدمة** في إنتاج واحتياطي **النفط** في العالم، وتتوزع حقوله في أغلب المحافظات.","**الحقول الشمالية**: بابا كركر وباي حسن وجمبور وعين زالة وبطمة والقيارة.","**الحقول الجنوبية**: الرميلة والزبير والفكة ومجنون. **الحقول الوسطى**: الأحدب وبدرة ونفط خانة.","يدخل النفط في صناعة **تكرير النفط** للحصول على البنزين والغاز الطبيعي والنفط الأبيض وزيت الغاز.","من المصافي: **مصفى الدورة** في بغداد، و**مصفى البصرة**، و**مصفى بيجي** في صلاح الدين.","**الغاز الطبيعي**: في الحقول القريبة من النفط، ويدخل في **الصناعات الكيمياوية والبتروكيمياوية** والحياة اليومية.","**الكبريت**: يدخل في صناعة **الأسمدة والأدوية والورق**، وأهم مناطقه في **نينوى**، ويعد **حقل المشراق** أهم حقوله.","**الفوسفات**: يدخل في صناعة **الأسمدة الفوسفاتية**، وأهم مناطق إنتاجه في الهضبة الغربية في **عكاشات**.","معادن أخرى: **الحديد والنحاس والزئبق**.","**الصناعة**: يتوافر في العراق المواد الأولية والأيدي العاملة ورأس المال، ومن صناعاته: **الغذائية، الإنشائية، المعدنية، الكيمياوية، الغزل والنسيج**، والكهربائية والدوائية."],
+  fact:"يصدّر العراق منتجاته النفطية عن طريق البحر إلى أغلب دول العالم."},
+ {t:"وسائل النقل والسياحة",idea:"يضم العراق طرق نقل كثيرة تنتشر في جميع محافظاته، تقسم إلى برية ومائية وجوية، وتنوعت فيه المواقع السياحية والتاريخية والدينية.",
+  pts:["نستخدم **السيارات والقطارات** في المسافات القصيرة، و**الطائرات والبواخر** في المسافات الطويلة.","**الطرق البرية**: طرق السيارات والسكك الحديد، تخدم جميع المدن والقرى.","**الطرق المائية الداخلية**: الطرق النهرية في دجلة والفرات وشط العرب.","**الطرق المائية الخارجية**: الطرق البحرية، ولها أهمية كبيرة في التجارة، إذ يصدر عبرها العراق النفط ويستورد البضائع.","يمتلك العراق **أسطولاً تجارياً** من البواخر وناقلات النفط، و**موانئ** على الخليج العربي: **أم قصر والمعقل والبصرة**.","**الطرق الجوية**: من المطارات: **بغداد وأربيل والبصرة والنجف الأشرف**، وسيتم إنشاء مطارات أخرى.","**السياحة**: تنتشر الآثار التاريخية في **بغداد وصلاح الدين ونينوى وأربيل وبابل وذي قار وواسط**.","**المصايف**: مصيف **صلاح الدين وسولاف وبيخال وشقلاوة**، ومراكز للاستجمام في **دوكان والحبانية**.","**السياحة الدينية**: زيارة المواقع الدينية والعتبات المقدسة في **النجف الأشرف وكربلاء المقدسة وبغداد وسامراء**."],
+  fact:"أصبحت السياحة الدينية في العراق مورداً اقتصادياً مهماً بعد النفط."}],
+vocab:[["توزيع السكان","توزيع عدد السكان على مناطق العراق"],["الزيادة السكانية","من أسبابها زيادة الولادات والهجرة"],["الزراعة","توفر الغذاء والمواد الأولية للصناعة"],["الثروة الحيوانية","أغنام وأبقار ودواجن وأسماك وغيرها"],["تكرير النفط","صناعة للحصول على البنزين والنفط الأبيض"],["الكبريت","معدن للأسمدة والأدوية، أهم حقوله المشراق"],["الفوسفات","معدن للأسمدة الفوسفاتية، يُنتج في عكاشات"],["النقل المائي الداخلي","النقل في الأنهار: دجلة والفرات وشط العرب"],["النقل المائي الخارجي","النقل البحري للتجارة وتصدير النفط"],["السياحة الدينية","زيارة المراقد والعتبات المقدسة"]],
+quiz:[
+ ["هل يتوزع سكان العراق بالتساوي على جميع مناطقه؟",["لا، يتركزون في السهول وضفاف الأنهار","نعم، بالتساوي","يتركزون في الصحراء","يتركزون في قمم الجبال"],"لا سيما في السهل الرسوبي."],
+ ["من أهم أسباب الزيادة السكانية:",["زيادة الولادات والهجرة","قلة الأمطار","الجبال","التصحر"],"لذلك عدد السكان متغير."],
+ ["يتركز السكان في السهل الرسوبي بسبب:",["انبساط الأرض ووفرة المياه وملاءمتها للزراعة","كثرة الجبال","الطابع الصحراوي","قلة المياه"],"ميزات السهل الرسوبي تجذب السكان."],
+ ["عدد السكان في العراق ثابت لا يتغير.",FT,"عدد السكان متغير بسبب الولادات والهجرة."],
+ ["تحتل الزراعة مكانة مهمة لأنها توفر:",["المواد الغذائية والمواد الأولية للصناعة","النفط والغاز","الحديد","الكهرباء"],"الزراعة أساس غذاء السكان."],
+ ["من أهم المحاصيل الزراعية في العراق:",["القمح والشعير والتمور","الشاي والبن","المطاط","الكاكاو"],"والرز والذرة والقطن وغيرها."],
+ ["من المحاصيل الصناعية التي تزرع في العراق:",["القطن وقصب السكر والتبغ","الشاي","البن","المطاط"],"تدخل في الصناعة."],
+ ["توفر الثروة الحيوانية الغذاء مثل:",["اللحوم والحليب والبيض","النفط","الفوسفات","الكبريت"],"وتدخل في الصناعات الجلدية والأسمدة."],
+ ["تدخل منتجات الثروة الحيوانية في صناعة:",["الجلود والأسمدة","الإسمنت","الزجاج","البنزين"],"الصناعات الجلدية من أهمها."],
+ ["تنتشر الثروة الحيوانية في محافظات العراق جميعاً.",TF,"تتكون من الأغنام والأبقار والدواجن وغيرها."],
+ ["يحتل العراق مرتبة متقدمة عالمياً في إنتاج واحتياطي:",["النفط","الذهب","القطن","الشاي"],"تتوزع حقوله في أغلب المحافظات."],
+ ["تقسم حقول النفط في العراق إلى:",["شمالية وجنوبية ووسطى","شرقية فقط","غربية فقط","بحرية فقط"],"ثلاثة أقسام."],
+ ["من الحقول النفطية الشمالية:",["بابا كركر","الرميلة","مجنون","بدرة"],"وباي حسن وجمبور وعين زالة."],
+ ["من الحقول النفطية الجنوبية:",["الرميلة والزبير","بابا كركر","عين زالة","نفط خانة"],"والفكة ومجنون."],
+ ["من الحقول النفطية الوسطى:",["الأحدب وبدرة ونفط خانة","الرميلة والزبير","بابا كركر وجمبور","عكاشات"],"تقع في وسط العراق."],
+ ["حقل الرميلة من الحقول الشمالية.",FT,"الرميلة من الحقول الجنوبية."],
+ ["من مشتقات النفط التي نحصل عليها بالتكرير:",["البنزين والنفط الأبيض","الفوسفات","الكبريت","القطن"],"والغاز وزيت الغاز."],
+ ["مصفى الدورة يقع في محافظة:",["بغداد","البصرة","صلاح الدين","نينوى"],"ومصفى بيجي في صلاح الدين."],
+ ["مصفى بيجي يقع في محافظة:",["صلاح الدين","بغداد","البصرة","الأنبار"],"من أكبر مصافي العراق."],
+ ["يدخل الغاز الطبيعي في الصناعات:",["الكيمياوية والبتروكيمياوية","الجلدية","النسيجية","الغذائية فقط"],"فضلاً عن استعمالاته اليومية."],
+ ["يدخل الكبريت في صناعة:",["الأسمدة والأدوية والورق","الإسمنت","الزجاج","البنزين"],"من المعادن المهمة."],
+ ["أهم حقول الكبريت في العراق:",["حقل المشراق","حقل الرميلة","عكاشات","مجنون"],"يقع في محافظة نينوى."],
+ ["تنتشر حقول الكبريت في محافظة واسط.",FT,"أهم مناطقه في محافظة نينوى."],
+ ["يستخدم الفوسفات في صناعة:",["الأسمدة الفوسفاتية","البنزين","الورق","الأقمشة"],"من المعادن المهمة."],
+ ["أين يُنتج الفوسفات في العراق؟",["عكاشات في الهضبة الغربية","المشراق","البصرة","دهوك"],"الهضبة الغربية غنية بالفوسفات."],
+ ["من المعادن الأخرى في العراق:",["الحديد والنحاس والزئبق","الماس","البلاتين","اليورانيوم"],"إلى جانب النفط والكبريت والفوسفات."],
+ ["لماذا تعددت الصناعات في العراق؟",["لتوافر المواد الأولية والأيدي العاملة ورأس المال","لقلة السكان","لعدم وجود موارد","لكثرة الجبال فقط"],"هذه أهم مقومات الصناعة."],
+ ["من الصناعات في العراق:",["الغذائية والإنشائية والمعدنية","صناعة السفن الفضائية","صناعة الماس","صناعة المطاط الطبيعي"],"والكيمياوية والغزل والنسيج."],
+ ["وسائل النقل المستخدمة في المسافات الطويلة:",["الطائرات والبواخر","الدراجات","العربات","المشي"],"والسيارات والقطارات للمسافات القصيرة."],
+ ["كم قسماً لطرق النقل في العراق؟",["ثلاثة","اثنان","أربعة","خمسة"],"برية ومائية وجوية."],
+ ["تشمل الطرق البرية:",["طرق السيارات والسكك الحديد","الأنهار","المطارات","الموانئ"],"تخدم المدن والقرى."],
+ ["النقل في دجلة والفرات وشط العرب يسمى:",["النقل المائي الداخلي","النقل المائي الخارجي","النقل الجوي","النقل البري"],"لأنه داخل العراق."],
+ ["النقل المائي الخارجي يعني:",["الطرق البحرية","الطرق النهرية","السكك الحديد","الطرق الجوية"],"مهم في التجارة وتصدير النفط."],
+ ["من موانئ العراق المطلة على الخليج العربي:",["أم قصر والمعقل والبصرة","حصيبة","فيشخابور","القرنة"],"عن طريقها يصدر ويستورد البضائع."],
+ ["من المطارات في العراق:",["بغداد وأربيل والبصرة والنجف الأشرف","سنجار وحمرين","الثرثار","عكاشات"],"وسيتم إنشاء مطارات أخرى."],
+ ["من المصايف في شمال العراق:",["صلاح الدين وسولاف وبيخال وشقلاوة","الرميلة والزبير","عكاشات","أم قصر"],"لاعتدال مناخها."],
+ ["من مراكز الاستجمام في العراق:",["دوكان والحبانية","المشراق","بابا كركر","الدورة"],"وهي بحيرات جميلة."],
+ ["زيارة المراقد والعتبات المقدسة تسمى:",["السياحة الدينية","السياحة الجبلية","التجارة الخارجية","الزراعة"],"من أهم أنواع السياحة في العراق."],
+ ["تنتشر العتبات المقدسة في:",["النجف الأشرف وكربلاء المقدسة وبغداد وسامراء","عكاشات","الرميلة","سولاف"],"يزورها الملايين."],
+ ["أصبحت السياحة الدينية مورداً اقتصادياً مهماً بعد:",["النفط","الفوسفات","القطن","الكبريت"],"النفط هو المورد الأول."]]},
+
+{u:1,no:"الفصل الأول",t:"بلاد الرافدين.. وطني",e:"🏺",
+lessons:[
+ {t:"بلاد الرافدين وأول كتابة في التاريخ",idea:"عُرف وطننا العراق عبر عصوره بأسماء عديدة، وأغرت أرضه الخصبة الإنسان بالاستقرار فيه منذ أقدم الأزمان، فأنتج حضارات عديدة حتى وقتنا الحاضر.",
+  pts:["من أسماء العراق: **بلاد الرافدين**، و**أرض بابل**، و**بلاد ما بين النهرين**، وفي العصور الإسلامية عُرف بـ**أرض السواد** لكثافة زراعته وكثرة خضرته.","أُطلقت تسمية **بلاد سومر** على الجزء الجنوبي، و**سومر وأكد** على الوسط والجنوب، و**بلاد آشور** على الجزء الشمالي.","ارتبطت تسمية العراق بنهري **دجلة والفرات** الخالدين، حتى قيل إن بلادنا **هبة الرافدين**.","من حضاراته: **السومرية والأكدية والبابلية والآشورية** ثم **الإسلامية**.","**العراقيون أول من اخترع الكتابة**، وظهرت بداياتها في **المعابد** لتدوين وارداتها وأملاكها.","لم يكن الورق معروفاً، فكتب العراقي القديم على ألواح صغيرة من **الطين الطري** تسمى **الرُّقُم الطينية**، بقلم **مثلث الرأس**.","سُميت **الكتابة المسمارية** لأن نهايات حروفها تشبه **رؤوس المسامير**.","ابتكر العراقيون **الأختام الأسطوانية**: أسطوانة من الحجر طولها بين **2 – 3.5 سم**، منقوشة بصورة **معكوسة**، إذا دُحرجت على الطين الطري تركت الصورة الأصلية.","يحفر على الختم مناظر للآلهة أو البشر أو الحيوانات، وقد يكتب عليه **اسم صاحبه وألقابه**، ويعلق بخيط حول الرقبة أو المعصم، واستخدمه بعضهم **حلياً**."],
+  fact:"من آثار حضاراتنا: القيثارة السومرية، وتمثال الملك سرجون الأكدي، وبرج بابل، والثور المجنح الآشوري."},
+ {t:"مهد القوانين والديانات والمعابد",idea:"تتصف حضارة بلاد الرافدين بصفات عظيمة أبرزها الشرائع والقوانين، وبلادنا من أقدم البلدان التي ظهرت فيها الديانات وأنشئت فيها المعابد.",
+  pts:["تعد شرائع العراقيين من **أقدم الشرائع** في التاريخ، وشملت نواحي الحياة **الاقتصادية والسياسية والاجتماعية والدينية**.","أكدت الشرائع على: **مجتمع منظم يسوده النظام والقانون**، و**احترام الطقوس الدينية**، و**العدالة وحماية الضعفاء واحترام المرأة والطفولة**.","أشهرها **شريعة الملك البابلي حمورابي**: لنشر العدل ومكافحة الفساد والغش، ومنع القوي من **اضطهاد الضعيف**.","عاقبت من يسرق أموال المعابد أو المال العام بغرامات تصل إلى **ثلاثين ضعفاً** من قيمة المسروق.","نُقشت على **مسلة من الحجر الأسود** باللغة البابلية والخط المسماري، وتتألف من **282 مادة** قانونية.","في أعلى المسلة نحت يمثل حمورابي واقفاً أمام **إله الشمس (شمش)** وهو **إله العدالة**، يتقبل منه الشرائع.","كان لكل مدينة سومرية **معبد خاص**، يقام على أماكن مرتفعة تسمى **الزقورات** لحمايتها من **الفيضانات**، يُصعد إليها بسلالم من الطابوق.","للمعابد نوعان: **الكبيرة (معابد الدولة)** وفيها عدد كبير من الكهنة والعمال، و**الصغيرة** لعبادة إله واحد. وتذكر المصادر وجود **153 معبداً** في بابل.","لم تكن المعابد للعبادة فقط: كانت تمتلك **أراضي زراعية** واسعة، و**محلات للصناعات اليدوية** كالحياكة وطحن الحبوب، وكانت **مراكز للعمل والتعليم (المدارس)**.","**المندي**: بيت العبادة لطائفة **الصابئة المندائيين**، من القصب والطين على ضفاف الأنهار، والمندائية من **أقدم الديانات التوحيدية** في جنوب العراق."],
+  fact:"يضمن الدستور العراقي في المادة (2) الحقوق الدينية لجميع الأفراد في حرية العقيدة، كالمسيحيين والإيزيديين والصابئة المندائيين."}],
+vocab:[["بلاد الرافدين","من أسماء العراق، نسبة إلى دجلة والفرات"],["أرض السواد","اسم العراق في العصور الإسلامية لكثرة خضرته"],["بلاد سومر","تسمية الجزء الجنوبي من العراق"],["بلاد آشور","تسمية الجزء الشمالي من العراق"],["الرُّقُم الطينية","ألواح من الطين الطري كُتب عليها"],["الكتابة المسمارية","كتابة تشبه نهايات حروفها رؤوس المسامير"],["الختم الأسطواني","أسطوانة حجرية منقوشة تُدحرج على الطين"],["مسلة حمورابي","حجر أسود نقشت عليه 282 مادة قانونية"],["الزقورة","مكان مرتفع يبنى عليه المعبد لحمايته"],["المندي","بيت العبادة للصابئة المندائيين"]],
+quiz:[
+ ["من أسماء العراق عبر العصور:",["بلاد الرافدين","بلاد الشام","بلاد النيل","بلاد المغرب"],"وأرض بابل وبلاد ما بين النهرين."],
+ ["عُرف العراق في العصور الإسلامية بـ:",["أرض السواد","أرض الكنانة","بلاد سومر","بلاد آشور"],"لكثافة زراعته وكثرة خضرته."],
+ ["لماذا سمي العراق بأرض السواد؟",["لكثافة زراعته وكثرة خضرته","لكثرة الجبال","لأن تربته سوداء من النفط","لقلة مياهه"],"الخضرة الكثيفة تبدو من بعيد داكنة."],
+ ["يسمى الجزء الجنوبي من العراق قديماً:",["بلاد سومر","بلاد آشور","أرض الحضر","بلاد الشام"],"وأطلق سومر وأكد على الوسط والجنوب."],
+ ["يسمى الجزء الشمالي من العراق قديماً:",["بلاد آشور","بلاد سومر","أرض بابل","أكد"],"ومن مدنه نينوى ونمرود وآشور."],
+ ["أطلق على وسط العراق وجنوبه قديماً اسم:",["سومر وأكد","آشور","الحضر","الحيرة"],"لاحظ خريطة بلاد الرافدين."],
+ ["قيل إن بلادنا هبة:",["الرافدين دجلة والفرات","النيل","البحر المتوسط","الصحراء"],"ارتبطت تسمية العراق بالنهرين الخالدين."],
+ ["من الحضارات العراقية القديمة:",["السومرية والأكدية والبابلية والآشورية","الفرعونية","الإغريقية","الصينية"],"قامت على أرض الرافدين."],
+ ["القيثارة السومرية من آثار الحضارة:",["السومرية","الآشورية","البابلية","الإسلامية"],"ومن كنوز سومر أيضاً الحلي."],
+ ["الملك سرجون من ملوك الحضارة:",["الأكدية","السومرية","الآشورية","العباسية"],"تمثاله من صور الكتاب."],
+ ["الثور المجنح من آثار الحضارة:",["الآشورية","السومرية","البابلية","الأكدية"],"كان يزين بوابات القصور."],
+ ["برج بابل من آثار الحضارة:",["البابلية","الآشورية","السومرية","الأكدية"],"وكذلك بوابة عشتار."],
+ ["أول من اخترع الكتابة في التاريخ هم:",["العراقيون","الإغريق","الرومان","الصينيون"],"ظهرت بداياتها في المعابد."],
+ ["ظهرت البدايات الأولى للكتابة في:",["المعابد","الأسواق","القصور","البيوت"],"لتدوين واردات المعابد وأملاكها."],
+ ["لماذا كتب العراقيون القدماء على الطين؟",["لأن الورق لم يكن معروفاً","لأن الطين أغلى","لأن الحجر غير موجود","للزينة فقط"],"والطين سهل النقش."],
+ ["الألواح الطينية التي كتب عليها العراقي القديم تسمى:",["الرُّقُم الطينية","الأختام","المسلات","الزقورات"],"ألواح صغيرة من الطين الطري."],
+ ["كان القلم الذي استخدمه العراقيون للكتابة على الطين:",["مثلث الرأس","مستدير الرأس","من الريش","من الفحم"],"فأصبحت الحروف تشبه المسامير."],
+ ["سميت الكتابة المسمارية بهذا الاسم لأن:",["نهايات حروفها تشبه رؤوس المسامير","كتبت بمسامير","كتبت على الحديد","اخترعها رجل اسمه مسمار"],"لأن القلم كان مثلث الرأس."],
+ ["الأختام الأسطوانية تُصنع من:",["الحجر","الورق","البلاستيك","الزجاج"],"وتنقش بصورة معكوسة."],
+ ["يتراوح طول الختم الأسطواني بين:",["2 – 3.5 سم","20 – 35 سم","1 – 2 متر","10 – 15 سم"],"صغير يعلق حول الرقبة أو المعصم."],
+ ["يُكتب على الختم الأسطواني أحياناً:",["اسم صاحبه وألقابه","اسم النهر","تاريخ الفيضان","عدد السكان"],"ليكون ختماً خاصاً به."],
+ ["استخدم بعض سكان بلاد الرافدين الأختام الأسطوانية:",["حلياً مع الأحجار الكريمة","وقوداً","طعاماً","سلاحاً"],"لجمال نحتها."],
+ ["العراقيون القدماء استخدموا الرقم الطينية بدلاً من الورق.",TF,"لأن الورق لم يكن معروفاً."],
+ ["تعد شرائع العراق القديمة من أقدم الشرائع في التاريخ الإنساني.",TF,"العراق مهد القوانين والتشريعات."],
+ ["أكدت شرائع العراقيين القدماء على:",["العدالة وحماية الضعفاء واحترام المرأة والطفولة","الحروب فقط","إهمال القانون","ظلم الضعيف"],"وعلى مجتمع منظم يسوده القانون."],
+ ["أشهر الشرائع العراقية القديمة شريعة:",["حمورابي","سرجون","المنصور","المعتصم"],"الملك البابلي حمورابي."],
+ ["كان حمورابي ملكاً:",["بابلياً","آشورياً","سومرياً","عباسياً"],"من ملوك الحضارة البابلية."],
+ ["من أهداف قوانين حمورابي:",["نشر العدل ومكافحة الفساد","زيادة الضرائب","هدم المعابد","منع الزراعة"],"ومنع القوي من اضطهاد الضعيف."],
+ ["كانت غرامة سرقة المال العام في شريعة حمورابي تصل إلى:",["ثلاثين ضعفاً","ضعفين","عشرة أضعاف","مئة ضعف"],"إضافة إلى العقوبات البدنية."],
+ ["نُقشت شريعة حمورابي على مسلة من:",["الحجر الأسود","الخشب","الذهب","الطين"],"باللغة البابلية والخط المسماري."],
+ ["عدد المواد القانونية في شريعة حمورابي:",["282","153","180","360"],"منقوشة على المسلة."],
+ ["في أعلى مسلة حمورابي نحت يمثل حمورابي أمام:",["إله الشمس شمش","الملك سرجون","إله القمر","الثور المجنح"],"وهو إله العدالة أيضاً."],
+ ["تعد قوانين حمورابي من أنضج وأكمل القوانين العراقية القديمة.",TF,"وهي جزء مهم من عطاء حضارتنا."],
+ ["كان لكل مدينة سومرية:",["معبد خاص بها","ملعب","ميناء","مطار"],"والمعابد تعكس ازدهار الحياة الدينية."],
+ ["الأماكن المرتفعة التي تقام عليها المعابد تسمى:",["الزقورات","المسلات","الرقم","الأختام"],"مثل زقورة أور."],
+ ["لماذا بنى العراقيون القدماء معابدهم على الزقورات؟",["لحمايتها من الفيضانات","لتكون قريبة من الأسواق","لأن الأرض مرتفعة دائماً","للتجارة"],"الفيضانات كانت متكررة."],
+ ["تذكر المصادر وجود كم معبداً في مدينة بابل؟",["153","282","18","1000"],"من بينها معبد لإله الشمس."],
+ ["نوعا المعابد في العراق القديم:",["الكبيرة (معابد الدولة) والصغيرة","البحرية والبرية","الشمالية والجنوبية","الطينية والزجاجية"],"الصغيرة خاصة بعبادة إله واحد."],
+ ["كانت المعابد للعبادة فقط.",FT,"كانت أيضاً مراكز للزراعة والصناعة والتعليم."],
+ ["من وظائف المعابد الاقتصادية:",["امتلاك أراضٍ زراعية ومحلات للصناعات اليدوية","تصدير النفط","صناعة السيارات","بناء المطارات"],"يعمل فيها المئات من الفلاحين والصناع."],
+ ["كانت المعابد مراكز للعمل والتعليم، أي:",["المدارس","المستشفيات","الموانئ","المصانع الحديثة"],"من وظائفها الاجتماعية."],
+ ["بيت العبادة لطائفة الصابئة المندائيين يسمى:",["المندي","الزقورة","المسلة","الخان"],"يبنى من القصب والطين على ضفاف الأنهار."],
+ ["تعد الديانة المندائية من أقدم الديانات التوحيدية في:",["جنوب العراق","شمال أفريقيا","أوروبا","الهند"],"وأبناؤها مكوّن أصيل من الشعب العراقي."],
+ ["يضمن الدستور العراقي حرية العقيدة والممارسة الدينية في المادة:",["(2)","(20)","(14)","(16)"],"للمسيحيين والإيزيديين والصابئة المندائيين."],
+ ["نص الدستور العراقي على المساواة بين العراقيين أمام القانون في المادة:",["(14)","(2)","(20)","(1)"],"وتكافؤ الفرص في المادة (16)."],
+ ["كتب الإمام علي (عليه السلام) عهده المشهور في حقوق الإنسان والإدارة لواليه على مصر:",["مالك الأشتر","سعد بن أبي وقاص","هاني بن عروة","أبي الأسود الدؤلي"],"من أهم النصوص في حقوق الإنسان والإدارة."],
+ ["من أجل حماية الآثار العراقية نطالب بشمولها:",["بالحماية الدولية وقائمة التراث العالمي","بالهدم","بالبيع","بالإهمال"],"الآثار إرث وطني."]]},
+
+{u:1,no:"الفصل الثاني",t:"العراق حاضرة الخلافة الإسلامية",e:"🕌",
+lessons:[
+ {t:"الكوفة عاصمة الخلافة الإسلامية (36 – 41 هـ)",idea:"الكوفة من الأمصار (المدن) الإسلامية التي أسسها العرب خارج الجزيرة العربية، واتخذها الإمام علي بن أبي طالب (عليه السلام) عاصمة لخلافته.",
+  pts:["أصبح العراق مقراً للخلافة مرتين: الأولى في خلافة **الإمام علي (ع)** بالكوفة، والثانية في خلافة **العباسيين** ببغداد وسامراء.","بُنيت الكوفة سنة **17 هـ** على يد القائد **سعد بن أبي وقاص**.","**تسميتها**: من صفات تربتها، فكل رمل خالطه حصى يسمى **كوفة**، أو نسبة إلى مرتفع صغير يسمى **كوفان**، أو لاستدارتها أو لاجتماع الناس بها.","**موقعها**: إلى الغرب من نهر الفرات، قرب مدينة **الحيرة** عاصمة دولة **المناذرة**، على طرف الصحراء لتأمين طرق المواصلات.","اختير موقعها لتوافر **الظروف الصحية والمناخية الجيدة** والمياه الصالحة للشرب من نهر الفرات القريب.","خُصص لكل قبيلة محلة خاصة سميت **الخطط**، وبنوا **المسجد الجامع ودار الإمارة وبيت المال والأسواق**.","ازدهرت بعد أن اتخذها **الإمام علي (ع)** عاصمة لخلافته سنة **36 هـ**، وكان يدير الدولة من جامعها الكبير.","نشأت فيها مدرسة للنحو العربي عُرفت بـ**مدرسة الكوفة**، وباسمها سمي **الخط الكوفي**.","أنجبت العلماء والمحدثين والفقهاء والشعراء، منهم **الشيخ المفيد والشيخ الطوسي والشريف المرتضى**، وتقع على **طريق الحج** إلى مكة المكرمة."],
+  fact:"من معالم الكوفة: مسجد الكوفة، ومرقد هاني بن عروة (رضي الله عنه)، وبقايا دار الإمارة."},
+ {t:"بغداد حاضرة الخلافة العباسية",idea:"أصبح العراق مقراً للخلافة مرة أخرى في زمن العباسيين حين اتخذوا بغداد عاصمة لهم، فهي أم الدنيا وسيدة البلاد ومدينة السلام.",
+  pts:["**أسباب اختيار بغداد**: موقعها وسط العراق على **نهر دجلة** الذي وفّر المياه للشرب والزراعة، وموقعها عند **ملتقى الطرق التجارية**، و**تأمين مكان جديد للجند**، و**اعتدال ظروفها المناخية**.","**تسميتها**: أرجعها بعض الباحثين إلى أصل **بابلي أو آرامي**، وسميت **مدينة السلام ودار السلام** (والسلام اسم لنهر دجلة).","سميت **المدينة المدورة** لشكلها **الدائري**، وأحيطت بسورين خارجي وداخلي، وهي أول مدينة عربية إسلامية بهذا الشكل لعوامل سياسية وعسكرية.","**أبوابها الأربعة**: باب **الكوفة**، وباب **البصرة**، وباب **خراسان**، وباب **الشام**.","**بانيها**: الخليفة **المنصور**، باشر بناءها سنة **145 هـ** على **الجانب الغربي** لنهر دجلة، وانتهى من السور الخارجي سنة **149 هـ**.","تطورت بسرعة، فنقل المنصور الأسواق إلى **الكرخ** سنة **157 هـ**، وبنى قصراً خاصاً به سماه **قصر الخلد**.","**الرصافة**: على **الجانب الشرقي**، اتخذها **المهدي** بن المنصور معسكراً لجنده سنة **152 هـ**، ثم صارت حافلة بالمدارس والأسواق والقصور.","كان **سوق الثلاثاء** من أعظم أسواقها، يعقد أول يوم ثلاثاء من كل شهر، و**المدرسة المستنصرية** من أشهر مدارسها.","تضم مرقد **الإمامين الجوادين (الكاظمين) (ع)** في الكاظمية، ومرقد **الإمام الأعظم أبي حنيفة النعمان** في الأعظمية."],
+  fact:"لإرثها الحضاري العظيم اختيرت بغداد عاصمة للثقافة العربية لسنة 2013م."},
+ {t:"سامراء عاصمة أخرى للخلافة العباسية",idea:"اتخذ الخليفة المعتصم العباسي مدينة سامراء سنة 221 هـ عاصمة له ومقراً لجنده، فبنى فيها القصور والدور والمساجد.",
+  pts:["جلب المعتصم **البنائين والفنانين** الماهرين، واشترى **الأشجار المثمرة** من جميع البلدان، مما يؤكد أهمية **التشجير** في الحفاظ على البيئة.","استمر بناؤها من **سنتين إلى ثلاث سنوات**، وأقيمت فيها المساجد ودواوين الدولة والأسواق والشوارع.","**موقعها**: في منطقة تسمى **القاطول** نسبة إلى نهر يحمل الاسم نفسه يتفرع من دجلة، وآثارها تعود إلى **ما قبل التاريخ**.","**تسميتها**: سامرا، وسومرا، و**سُرَّ من رأى**، وأخيراً سامراء. وقيل إن المعتصم **سُرَّ هو وجنده برؤيتها** بعد اكتمال بنائها.","تعد سنة **223 هـ** بداية حياتها كعاصمة، وقسّم المعتصم أحياءها وسمى كل واحد منها **القطيعة**.","من أشهر شوارعها **شارع الخليج** بمحاذاة دجلة، حيث تفرغ السفن القادمة من بغداد والبصرة وواسط والموصل بضائعها، وأقام **جسراً** بين جانبيها.","من قصورها: **الجوسق والعاشق والمعشوق**. ومن جوامعها **الجامع الكبير** ومئذنته **الملوية**.","**الملوية**: مخروطية الشكل على قاعدة مربعة، من **خمسة أدوار**، يُصعد إلى قمتها **بعكس دوران الساعة**، ارتفاعها **52 متراً**، ويرجح أنها بنيت على هيئة **الزقورات**.","بقيت عاصمة نحو **58 عاماً**، حكم خلالها **ثمانية** خلفاء، آخرهم **المعتمد على الله** الذي عاد إلى بغداد سنة **279 هـ**.","تضم ضريح **الإمامين العسكريين (ع)**: الإمام **علي الهادي** (ت 254 هـ) والإمام **الحسن العسكري** (ت 260 هـ)، وعليهما **أكبر قبة** في العالم الإسلامي."],
+  fact:"يشير بناء قصور سامراء وجوامعها والملوية إلى مهارة البنائين والمعماريين العراقيين في الهندسة المعمارية وتخطيط المدن."}],
+vocab:[["الأمصار","المدن الإسلامية التي أسسها العرب، مثل الكوفة"],["الخطط","محلات خصصت لكل قبيلة في الكوفة"],["دار الإمارة","مقر الحكم والإدارة في المدينة"],["بيت المال","خزينة الدولة لأموال المسلمين"],["الخط الكوفي","نوع من الخط العربي سمي باسم الكوفة"],["الحيرة","عاصمة دولة المناذرة قرب الكوفة"],["المدينة المدورة","بغداد التي بناها المنصور بشكل دائري"],["الرصافة","الجانب الشرقي من بغداد"],["سُرَّ من رأى","من أسماء مدينة سامراء"],["الملوية","مئذنة جامع سامراء الكبير، ارتفاعها 52 م"]],
+quiz:[
+ ["أصبح العراق مقراً للخلافة الإسلامية:",["مرتين","مرة واحدة","ثلاث مرات","لم يصبح مقراً"],"في زمن الإمام علي (ع) ثم العباسيين."],
+ ["اتخذ الإمام علي (عليه السلام) عاصمة لخلافته مدينة:",["الكوفة","بغداد","سامراء","البصرة"],"سنة 36 هـ."],
+ ["كانت الكوفة عاصمة للخلافة الإسلامية في المدة:",["36 – 41 هـ","145 – 149 هـ","221 – 279 هـ","17 – 36 هـ"],"في عهد الإمام علي (ع)."],
+ ["بُنيت الكوفة سنة:",["17 هـ","36 هـ","145 هـ","221 هـ"],"على يد سعد بن أبي وقاص."],
+ ["أول من خطط لبناء الكوفة:",["سعد بن أبي وقاص","المنصور","المعتصم","المهدي"],"القائد سعد بن أبي وقاص."],
+ ["الكوفة من الأمصار الإسلامية التي أسسها العرب:",["خارج الجزيرة العربية","في مكة","في الشام","في مصر"],"والأمصار تعني المدن."],
+ ["من آراء تسمية الكوفة أن كل رمل خالطه حصى يسمى:",["كوفة","بغداد","سامرا","الحيرة"],"فاسمها مأخوذ من صفات تربتها."],
+ ["سميت الكوفة نسبة إلى مرتفع صغير يسمى:",["كوفان","القاطول","الكرخ","الرصافة"],"حسب أحد الآراء."],
+ ["تقع الكوفة بالنسبة لنهر الفرات إلى:",["الغرب منه","الشرق منه","الشمال منه","داخل النهر"],"على طرف الصحراء."],
+ ["تقع الكوفة قريباً من مدينة الحيرة عاصمة دولة:",["المناذرة","العباسيين","الآشوريين","السومريين"],"دولة المناذرة المعروفة."],
+ ["لماذا اختير موقع الكوفة على طرف الصحراء؟",["لتأمين طرق المواصلات والإمدادات","لأنه بعيد عن الماء","لكثرة الجبال","للفيضانات"],"ولتوافر الظروف الصحية والمياه."],
+ ["المحلات التي خصصت لكل قبيلة في الكوفة سميت:",["الخطط","القطائع","الأسواق","الدواوين"],"وبنوا معها المسجد الجامع."],
+ ["باسم الكوفة سمي نوع من الخط العربي هو:",["الخط الكوفي","خط الرقعة","خط النسخ","الخط الفارسي"],"ونشأت فيها مدرسة للنحو."],
+ ["نشأت في الكوفة مدرسة للنحو العربي عرفت بـ:",["مدرسة الكوفة","المستنصرية","النظامية","بيت الحكمة"],"اشتهرت بمكانتها العلمية."],
+ ["من علماء الكوفة:",["الشيخ المفيد والشيخ الطوسي","حمورابي","سرجون","جواد سليم"],"والشريف المرتضى."],
+ ["من معالم الكوفة:",["مسجد الكوفة ودار الإمارة","الملوية","المستنصرية","نصب الحرية"],"ومرقد هاني بن عروة."],
+ ["اتخذ العباسيون عاصمة لهم مدينة:",["بغداد","الكوفة","البصرة","الموصل"],"ثم سامراء مدة من الزمن."],
+ ["من أسباب اختيار بغداد عاصمة:",["موقعها وسط العراق على نهر دجلة","وقوعها في الصحراء","بعدها عن الطرق التجارية","قلة مياهها"],"وموقعها عند ملتقى الطرق التجارية."],
+ ["اعتدال الظروف المناخية في بغداد دليل على أن:",["البيئة السليمة تساهم في نشوء المدن الحضارية","المناخ لا يهم","الصحراء أفضل للمدن","الجبال ضرورية"],"من أسباب اختيارها."],
+ ["سميت بغداد مدينة السلام لأن:",["السلام هو الله، واسم لنهر دجلة","بها نهر السلام فقط","بناها رجل اسمه سلام","لا حروب فيها"],"فهي مدينة الله ودار السلام."],
+ ["سميت بغداد بالمدينة المدورة لأنها:",["اتخذت شكلاً دائرياً","مبنية على جبل","تشبه المثلث","بلا أسوار"],"أحيطت بسور خارجي وآخر داخلي."],
+ ["عدد أبواب بغداد المدورة:",["أربعة","ثلاثة","ستة","ثمانية"],"الكوفة والبصرة وخراسان والشام."],
+ ["من أبواب بغداد المدورة:",["باب الكوفة وباب البصرة","باب المعظم","باب الشيخ","الباب الشرقي"],"وباب خراسان وباب الشام."],
+ ["باني مدينة بغداد هو الخليفة:",["المنصور","المعتصم","المستنصر","المأمون"],"أبو جعفر المنصور."],
+ ["باشر المنصور ببناء بغداد سنة:",["145 هـ","17 هـ","221 هـ","631 هـ"],"وانتهى من السور الخارجي سنة 149 هـ."],
+ ["بنى المنصور بغداد المدورة على الجانب:",["الغربي لنهر دجلة","الشرقي لنهر دجلة","الغربي لنهر الفرات","الشمالي للخليج"],"والرصافة على الجانب الشرقي."],
+ ["نقل الخليفة المنصور أسواق بغداد إلى:",["الكرخ","الرصافة","الكاظمية","الأعظمية"],"سنة 157 هـ."],
+ ["القصر الذي بناه المنصور لنفسه في بغداد:",["قصر الخلد","الجوسق","العاشق","المعشوق"],"أما الجوسق ففي سامراء."],
+ ["تقع الرصافة على الجانب الشرقي من بغداد.",TF,"اتخذها المهدي معسكراً لجنده."],
+ ["اتخذ الرصافة معسكراً لجنده سنة 152 هـ:",["المهدي","المنصور","المعتصم","المعتمد"],"وهو ابن الخليفة المنصور."],
+ ["من أعظم أسواق بغداد:",["سوق الثلاثاء","سوق عكاظ","سوق الخميس","سوق الجمعة"],"يعقد أول يوم ثلاثاء من كل شهر."],
+ ["تضم الكاظمية في بغداد مرقد:",["الإمامين الكاظمين (عليهما السلام)","الإمامين العسكريين","هاني بن عروة","الإمام العباس"],"وتسمى مقابر قريش."],
+ ["يقع مرقد الإمام الأعظم أبي حنيفة النعمان في:",["الأعظمية","الكاظمية","الكرخ","سامراء"],"مقابر الخيزران."],
+ ["اختيرت بغداد عاصمة للثقافة العربية لسنة:",["2013م","2014م","2005م","1948م"],"لإرثها الحضاري العظيم."],
+ ["بغداد أم الدنيا وسيدة البلاد و:",["مدينة السلام","مدينة الملوية","أرض السواد","هبة النيل"],"من ألقابها المشهورة."],
+ ["اتخذ الخليفة المعتصم العباسي عاصمة له مدينة:",["سامراء","بغداد","الكوفة","واسط"],"سنة 221 هـ."],
+ ["اتخذ المعتصم سامراء عاصمة سنة:",["221 هـ","145 هـ","36 هـ","279 هـ"],"وكانت مقراً لجنده أيضاً."],
+ ["شراء المعتصم للأشجار المثمرة من جميع البلدان يؤكد:",["أهمية التشجير في الحفاظ على البيئة","حبه للتجارة فقط","قلة الأشجار في العالم","عدم الاهتمام بالبيئة"],"البيئة السليمة مهمة منذ القدم."],
+ ["تقع سامراء القديمة في منطقة تسمى:",["القاطول","الكرخ","كوفان","الحيرة"],"نسبة إلى نهر يتفرع من دجلة."],
+ ["من أسماء سامراء:",["سُرَّ من رأى","أرض السواد","دار السلام","المدورة"],"وسامرا وسومرا."],
+ ["تعد بداية حياة سامراء كعاصمة للدولة العباسية سنة:",["223 هـ","145 هـ","17 هـ","631 هـ"],"بعد اكتمال بنائها."],
+ ["سُمي كل حي من أحياء سامراء:",["القطيعة","الخطة","الرصافة","المحلة"],"لكونه خصص لجماعة معينة."],
+ ["من أشهر شوارع سامراء شارع الخليج بمحاذاة:",["نهر دجلة","نهر الفرات","شط العرب","بحيرة الثرثار"],"حيث تفرغ السفن بضائعها."],
+ ["من أشهر قصور سامراء:",["الجوسق والعاشق والمعشوق","قصر الخلد","دار الإمارة","المستنصرية"],"تدل على مهارة البنائين."],
+ ["مئذنة الجامع الكبير في سامراء تسمى:",["الملوية","الزقورة","المسلة","الحدباء"],"مخروطية الشكل."],
+ ["تتكون الملوية من:",["خمسة أدوار","ثلاثة أدوار","سبعة أدوار","دورين"],"على قاعدة مربعة."],
+ ["يبلغ ارتفاع الملوية:",["52 متراً","25 متراً","100 متر","3600 متر"],"ويصعد إلى قمتها بعكس دوران الساعة."],
+ ["الرأي السائد أن مئذنة الملوية بنيت على هيئة:",["الزقورات العراقية القديمة","الأهرامات","المسلات","القباب"],"تأثراً بالعمارة العراقية القديمة."],
+ ["استمرت سامراء عاصمة للخلافة العباسية مدة تقارب:",["58 عاماً","10 أعوام","100 عام","5 أعوام"],"حكم خلالها ثمانية خلفاء."],
+ ["آخر الخلفاء العباسيين الذين تركوا سامراء:",["المعتمد على الله","المعتصم","المنصور","المهدي"],"عاد إلى بغداد سنة 279 هـ."],
+ ["تضم سامراء ضريح:",["الإمامين العسكريين (عليهما السلام)","الإمامين الكاظمين","الإمام العباس","أبي حنيفة النعمان"],"الإمام علي الهادي والإمام الحسن العسكري."],
+ ["بُنيت على ضريح الإمامين العسكريين:",["أكبر قبة في العالم الإسلامي","أعلى مئذنة","أقدم زقورة","أكبر سوق"],"في مدينة سامراء."]]},
+
+{u:1,no:"الفصل الثالث",t:"العراق.. موطن العلم والعلماء",e:"📜",
+lessons:[
+ {t:"المدرسة النظامية والمدرسة المستنصرية",idea:"اهتم أجدادنا العراقيون القدماء بالعلم كثيراً، واستمروا بتطوير علومهم في الفترة الإسلامية، فضمّت المدن الرئيسة المدارس ومراكز البحث العلمي.",
+  pts:["تشير آثارهم إلى اهتمامهم بـ**الحساب والهندسة والطب والفلك**، وتطور ذلك حين أصبح العراق مركزاً للخلافة الإسلامية.","تذكر المصادر وجود **أكثر من ثلاثين مدرسة** ببغداد، أشهرها **النظامية والمستنصرية**.","**المدرسة النظامية**: أخذت اسمها من مؤسسها الوزير السلجوقي **نظام الملك الطوسي**، ومن أولى المدارس في بغداد والعالم، اكتمل بناؤها سنة **459 هـ**.","احتوت على **مساكن للطلاب والأساتذة**، وعُيّن لها مدراء يسمون **النظّار**، وكانت الدراسة على شكل **حلقات** يرأس كل حلقة أحد الفقهاء.","درّست علوم **القرآن والحديث والفقه وعلم الكلام والنحو**، وكان الطلاب يسكنون ويتناولون الطعام **مجاناً**، وضمت خزانتها **ستة آلاف مجلد**.","**المدرسة المستنصرية**: نسبة إلى الخليفة العباسي **المستنصر بالله** الذي بناها سنة **631 هـ**، وما زالت بنايتها قائمة حتى اليوم.","تعد **أول جامعة إسلامية متخصصة** في العالم بمفهوم الجامعة الحديث، وضمت **أربع دور (كليات)**: دار القرآن الكريم، ودار السنة النبوية الشريفة، ودار الفقه، ودار الطب.","تميزت بأمرين: **دفع الرواتب** للطلاب والمدرسين والموظفين (وتضاعف في رمضان)، و**تأسيس حمام** للاغتسال، دليلاً على الاهتمام بالنظافة الشخصية.","لم يتجاوز عدد طلابها **ثلاثمائة** طالب، وضمت **مستشفى تعليمياً** يعالج المرضى مجاناً، وخزانة أهدى إليها المستنصر **ثمانين ألف كتاب**، ومساكن للطلبة (**الأقسام الداخلية**)."],
+  fact:"«النظافة من الإيمان»، لذلك أسست المستنصرية حماماً لخدمة جميع الطلاب والعاملين، وهو عمل لم يسبقه مثيل."},
+ {t:"بيت الحكمة ودور العلم",idea:"بيت الحكمة من أهم المؤسسات العلمية والثقافية التي تأسست في بغداد منذ أن شيدها الخليفة أبو جعفر المنصور سنة 145 هـ.",
+  pts:["بدأ **خزانة** للكتب الفلسفية والطبية وعلوم الهندسة والفلك وغيرها.","تطور في زمن الخليفة **هارون الرشيد** ليصبح مؤسسة للبحث العلمي والتأليف والترجمة، يضم **مترجمين ونساخين ومجلدين** وحفظة للكتب.","من أشهر المترجمين **يوحنا بن ماسويه** وكان **مسيحياً**، مما يؤكد **التعايش السلمي** بين الأديان، وأشرف على ترجمة **الكتب الطبية** إلى العربية.","و**الفضل بن نوبخت** أشرف على ترجمة الكتب من **الفارسية** إلى العربية.","في خلافة **المأمون** تحولت الخزانة إلى مركز للبحث العلمي والترجمة والتأليف، وسمي **بيت الحكمة**.","يقع بيت الحكمة على جانب **الرصافة** قرب **جسر باب المعظم**، وصار مثالاً يحتذى به، كـ**دار الحكمة** التي أسسها **الفاطميون بالقاهرة**.","**دور العلم**: أسس **جعفر بن حمدان** في **الموصل** داراً للعلم سنة **333 هـ** وجعلها وقفاً لطلبة العلم.","وأنشأ **أبو علي بن سوار** في **البصرة** داراً للعلم سنة **372 هـ** للقراءة والبحث.","وأسس الوزير **سابور بن أردشير** سنة **383 هـ** داراً للعلم في **الكرخ** ببغداد، ضمّت أكثر من **عشرة آلاف كتاب**، وكانت تجري فيها **مناظرات** العلماء والأدباء والشعراء."],
+  fact:"ضمت دار علم سابور نسخاً من القرآن الكريم بخط أشهر الخطاطين العراقيين المعروفين آنذاك."},
+ {t:"علماء عراقيون",idea:"شهد تاريخ العراق ظهور الكثير من العلماء والمفكرين والأدباء والشعراء الذين أسهموا في رفد الحضارة العربية والإسلامية والإنسانية.",
+  pts:["**أبو الأسود الدؤلي**: ظالم بن عمرو الكناني، **أول من وضع قواعد النحو العربي** بالبصرة بعد أن رسم له الإمام علي (ع) أصوله، و**أول من نقّط المصحف**، توفي سنة **69 هـ**.","**جابر بن حيان الكوفي**: **واضع علم الكيمياء**، تتلمذ على يد **الإمام جعفر الصادق (ع)**، واعتمد **المنهج التجريبي**، ومن كتبه **الميزان** و**الإيضاح**، توفي بحدود سنة **200 هـ**.","من إنجازات جابر: **طلاء يمنع صدأ الحديد**، و**ورق غير قابل للاحتراق**، و**صبغ الجلود والشعر** واستخدام الشب لتثبيت الألوان.","**أبو إسحاق الصابي**: من **الصابئة المندائيين**، ولد في بغداد واشتغل بالطب والهندسة والفلك، ومن كتبه **رسالة في الإسطرلاب**، توفي سنة **335 هـ**.","**المسعودي**: مؤرخ ورحالة ولد ببغداد، من كتبه **مروج الذهب ومعادن الجوهر** و**التنبيه والإشراف**، توفي سنة **346 هـ**.","**الحسن بن الهيثم البصري**: درس المرايا وامتزاج الألوان، ومن كتبه **المناظر** في علم الضوء والبصريات، وتحدث عن **تشريح العين** و**قوس قزح**، توفي سنة **430 هـ**.","**شهدة بنت الأبري البغدادية**: الملقبة بـ**فخر النساء**، من أشهر **راويات الحديث**، ومن النساء المعروفات بجودة الخط العربي، توفيت ببغداد سنة **574 هـ**.","**شعراء**: **محمد مهدي الجواهري** (شاعر العرب الأكبر)، و**بدر شاكر السياب**، و**نازك الملائكة**، و**سركون بولص**، و**عبد الله كوران**، و**مصطفى جمال الدين**.","**د. عبد الجبار عبد الله**: من الصابئة المندائيين، **سفير العراق العلمي**، من أشهر علماء **الفيزياء والأنواء الجوية**، و**أول رئيس لجامعة بغداد** بعد ثورة 14 تموز 1958م.","ومن علمائنا: الأب **أنستاس الكرملي** (اللغة العربية)، و**مصطفى جواد** (مؤرخ ولغوي)، و**كمال السامرائي** (طبيب)، و**محمد أمين زكي** (مؤرخ)، و**علي الوردي** (عالم اجتماع)، و**حسين علي محفوظ**، والمعمارية **زها حديد**.","**جواد سليم** (1921 – 1961م): من أشهر النحاتين، أسس **جماعة الفن الحديث**، وشيّد **نصب الحرية** في ساحة التحرير ببغداد، ويمثل كفاح الشعب العراقي من أجل الحرية."],
+  fact:"يقول الجواهري في حب وطنه: «حَيِيتُ سَفْحَكِ عن بعدٍ فحَيِّيني... يا دجلةَ الخيرِ يا أمَّ البساتينِ»."}],
+vocab:[["المدرسة النظامية","أسسها نظام الملك الطوسي، اكتملت 459 هـ"],["النظّار","مدراء المدرسة النظامية"],["المدرسة المستنصرية","بناها المستنصر بالله 631 هـ، أول جامعة إسلامية"],["الأقسام الداخلية","مساكن الطلبة والمدرسين في المستنصرية"],["بيت الحكمة","مؤسسة للبحث والترجمة والتأليف ببغداد"],["دار العلم","مكتبة ومركز للقراءة والبحث والمناظرات"],["المنهج التجريبي","اعتماد التجربة أساساً للعلم، اتبعه جابر"],["الإسطرلاب","آلة فلكية، كتب عنها أبو إسحاق الصابي"],["كتاب المناظر","كتاب ابن الهيثم في الضوء والبصريات"],["نصب الحرية","عمل جواد سليم في ساحة التحرير ببغداد"]],
+quiz:[
+ ["اهتم العراقيون القدماء بعلوم:",["الحساب والهندسة والطب والفلك","الحاسوب","الفضاء","الطيران"],"كما تشير آثارهم."],
+ ["تذكر المصادر وجود عدد من المدارس في بغداد يزيد على:",["ثلاثين مدرسة","خمس مدارس","مئة مدرسة","مدرستين"],"أشهرها النظامية والمستنصرية."],
+ ["أخذت المدرسة النظامية اسمها من مؤسسها:",["نظام الملك الطوسي","المستنصر بالله","المأمون","المنصور"],"الوزير السلجوقي."],
+ ["كان نظام الملك الطوسي وزيراً:",["سلجوقياً","عباسياً","أموياً","بابلياً"],"وأسس المدرسة النظامية."],
+ ["اكتمل بناء المدرسة النظامية سنة:",["459 هـ","631 هـ","145 هـ","333 هـ"],"من أولى المدارس في بغداد والعالم."],
+ ["كان مدراء المدرسة النظامية يسمون:",["النظّار","المشرفين","العمداء","الخلفاء"],"وعين لها مشرفون وكُتّاب."],
+ ["كانت الدراسة في المدرسة النظامية على شكل:",["حلقات","صفوف إلكترونية","رحلات","دروس عبر الهاتف"],"يرأس كل حلقة أحد الفقهاء."],
+ ["كانت خزانة كتب المدرسة النظامية تضم:",["ستة آلاف مجلد","ثمانين ألف كتاب","عشرة آلاف كتاب","مئة كتاب"],"من أمهات الكتب والمخطوطات."],
+ ["كان طلاب المدرسة النظامية يتناولون الطعام مجاناً.",TF,"ويسكنون فيها أيضاً."],
+ ["سميت المدرسة المستنصرية نسبة إلى:",["الخليفة المستنصر بالله","نظام الملك","المنصور","هارون الرشيد"],"الخليفة العباسي."],
+ ["بنى المستنصر بالله المدرسة المستنصرية سنة:",["631 هـ","459 هـ","145 هـ","383 هـ"],"وما زالت بنايتها قائمة."],
+ ["تعد المستنصرية:",["أول جامعة إسلامية متخصصة بمفهوم الجامعة الحديث","أول مسجد","أول مستشفى في العالم","أول سوق"],"تذكر العراقيين بعظمة تراثهم."],
+ ["عدد الدور (الكليات) في المدرسة المستنصرية:",["أربع","ثلاث","ست","ثماني"],"القرآن والسنة والفقه والطب."],
+ ["من دور المدرسة المستنصرية:",["دار القرآن الكريم ودار الطب","دار الهندسة الكهربائية","دار الفضاء","دار الحاسوب"],"ودار السنة النبوية ودار الفقه."],
+ ["تميزت المستنصرية بدفع الرواتب للطلبة والمدرسين، وكانت تتضاعف في:",["شهر رمضان المبارك","فصل الصيف","العطلة","شهر محرم"],"وهذا من مميزاتها."],
+ ["تأسيس حمام في المدرسة المستنصرية دليل على:",["الاهتمام بالنظافة الشخصية","حب السباحة","كثرة المياه","الترف"],"لأن النظافة من الإيمان."],
+ ["لم يتجاوز عدد طلاب المدرسة المستنصرية:",["ثلاثمائة طالب","ثلاثة آلاف طالب","ثلاثين طالباً","مليون طالب"],"يتم اختيارهم من النابهين."],
+ ["أهدى الخليفة المستنصر إلى خزانة المدرسة:",["ثمانين ألف كتاب","ستة آلاف مجلد","عشرة كتب","مئة كتاب"],"وكانت خزانتها عامرة."],
+ ["ضمت المدرسة المستنصرية مستشفى تعليمياً لتعليم الطب ومعالجة المرضى مجاناً.",TF,"وكان ذلك من عظمتها."],
+ ["المساكن التي ألحقت بالمستنصرية للطلبة والمدرسين تسمى:",["الأقسام الداخلية","الخطط","القطائع","الدواوين"],"يتناولون فيها الطعام مجاناً."],
+ ["شيّد المنصور بيت الحكمة أول الأمر سنة:",["145 هـ","631 هـ","459 هـ","383 هـ"],"كان خزانة للكتب."],
+ ["تطور بيت الحكمة ليصبح مؤسسة للبحث العلمي والترجمة في زمن الخليفة:",["هارون الرشيد","المعتصم","المعتمد","المهدي"],"وضم مترجمين ونساخين ومجلدين."],
+ ["من أشهر المترجمين في بيت الحكمة:",["يوحنا بن ماسويه","جابر بن حيان","المسعودي","حمورابي"],"وكان مسيحياً."],
+ ["عمل يوحنا بن ماسويه المسيحي في بيت الحكمة يؤكد:",["التعايش السلمي بين الأديان","عدم التسامح","الحروب","التفرقة"],"في ظل الحضارة العربية الإسلامية."],
+ ["أشرف يوحنا بن ماسويه على ترجمة الكتب:",["الطبية","الفلكية","الشعرية","الزراعية"],"من اللغات الأجنبية إلى العربية."],
+ ["أشرف على ترجمة الكتب من الفارسية إلى العربية:",["الفضل بن نوبخت","يوحنا بن ماسويه","ابن الهيثم","المسعودي"],"في بيت الحكمة."],
+ ["سُمي بيت الحكمة بهذا الاسم في خلافة:",["المأمون","المنصور","المستنصر","المعتصم"],"حين تحول إلى مركز للبحث والترجمة."],
+ ["يقع بيت الحكمة على جانب الرصافة قرب:",["جسر باب المعظم","جسر الصرافية","ساحة التحرير","الملوية"],"في بغداد."],
+ ["تأثر بفكرة بيت الحكمة الفاطميون فأسسوا في القاهرة:",["دار الحكمة","المستنصرية","النظامية","الزقورة"],"صار بيت الحكمة مثالاً يحتذى به."],
+ ["أسس جعفر بن حمدان داراً للعلم سنة 333 هـ في:",["الموصل","البصرة","الكرخ","الكوفة"],"وجعلها وقفاً لطلبة العلم."],
+ ["أنشأ أبو علي بن سوار داراً للعلم سنة 372 هـ في:",["البصرة","الموصل","بغداد","سامراء"],"للقراءة والبحث."],
+ ["أسس الوزير سابور بن أردشير داراً للعلم في الكرخ سنة:",["383 هـ","333 هـ","372 هـ","430 هـ"],"ضمت أكثر من عشرة آلاف كتاب."],
+ ["كانت تجري في دار علم سابور مناظرات يحضرها:",["العلماء والأدباء والشعراء","التجار فقط","الجنود","الأطفال فقط"],"من مناطق مختلفة."],
+ ["أول من وضع قواعد النحو العربي:",["أبو الأسود الدؤلي","جابر بن حيان","المسعودي","ابن الهيثم"],"بالبصرة بعد أن رسم له الإمام علي (ع) أصوله."],
+ ["أول من نقّط المصحف الشريف:",["أبو الأسود الدؤلي","الفضل بن نوبخت","المسعودي","أبو إسحاق الصابي"],"وهو من الشعراء الكبار أيضاً."],
+ ["واضع علم الكيمياء:",["جابر بن حيان","ابن الهيثم","المسعودي","الدؤلي"],"جابر بن حيان الكوفي."],
+ ["تتلمذ جابر بن حيان على يد:",["الإمام جعفر الصادق (ع)","نظام الملك","المأمون","الجواهري"],"واعتمد المنهج التجريبي."],
+ ["اعتمد جابر بن حيان المنهج:",["التجريبي","الخيالي","الشعري","التاريخي"],"وأكد أن التجربة أساس صنعة الكيمياء."],
+ ["من كتب جابر بن حيان:",["الميزان والإيضاح","المناظر","مروج الذهب","رسالة في الإسطرلاب"],"درست في أوروبا لقرون."],
+ ["من إنجازات جابر بن حيان:",["طلاء يمنع صدأ الحديد","اختراع الهاتف","اكتشاف الكهرباء","صناعة الطائرة"],"وورق غير قابل للاحتراق."],
+ ["أبو إسحاق الصابي من:",["الصابئة المندائيين","الكلدان","الآشوريين","الأرمن"],"مما يدل على التعايش السلمي."],
+ ["من كتب أبي إسحاق الصابي في علوم الفلك:",["رسالة في الإسطرلاب","المناظر","الميزان","مروج الذهب"],"اشتغل بالطب والهندسة والفلك."],
+ ["مؤلف كتاب «مروج الذهب ومعادن الجوهر»:",["المسعودي","ابن الهيثم","جابر بن حيان","الدؤلي"],"مؤرخ ورحالة ولد ببغداد."],
+ ["كان المسعودي:",["مؤرخاً ورحالة","طبيباً","نحاتاً","معمارياً"],"وله كتاب التنبيه والإشراف."],
+ ["ولد الحسن بن الهيثم في:",["البصرة","الكوفة","الموصل","سامراء"],"ويعد من أشهر علماء البصريات."],
+ ["من أشهر كتب ابن الهيثم في علم الضوء:",["المناظر","الميزان","الإيضاح","مروج الذهب"],"تناول فيه أبحاث الضوء والبصريات."],
+ ["تحدث ابن الهيثم عن تشريح العين وعن ظاهرة:",["قوس قزح","البرق","الزلازل","المد والجزر"],"انعكاس الضوء على قطرات الماء."],
+ ["الراوية شهدة بنت الأبري البغدادية لُقبت بـ:",["فخر النساء","أم البساتين","سيدة البلاد","شاعرة العرب"],"من أشهر راويات الحديث."],
+ ["لُقب محمد مهدي الجواهري بـ:",["شاعر العرب الأكبر","سفير العراق العلمي","فخر النساء","واضع النحو"],"تغنى ببغداد ونهرها الخالد."],
+ ["من الشعراء العراقيين:",["بدر شاكر السياب ونازك الملائكة","ابن الهيثم وجابر","حمورابي وسرجون","المنصور والمعتصم"],"تغنوا بحب العراق."],
+ ["الملقب بسفير العراق العلمي:",["د. عبد الجبار عبد الله","علي الوردي","مصطفى جواد","جواد سليم"],"عالم فيزياء وأنواء جوية."],
+ ["أول رئيس لجامعة بغداد بعد ثورة 14 تموز 1958م:",["د. عبد الجبار عبد الله","د. علي الوردي","الأب أنستاس الكرملي","د. كمال السامرائي"],"من أبناء طائفة الصابئة المندائيين."],
+ ["د. علي الوردي عالم في:",["الاجتماع","الكيمياء","الطب","العمارة"],"من العلماء العراقيين المعاصرين."],
+ ["زها حديد من أشهر:",["المعماريين","الشعراء","الأطباء","المؤرخين"],"المعمارية العراقية زها حديد."],
+ ["صمم نصب الحرية في ساحة التحرير ببغداد الفنان:",["جواد سليم","زها حديد","الجواهري","السياب"],"ويمثل كفاح الشعب من أجل الحرية."],
+ ["أسس جواد سليم:",["جماعة الفن الحديث","بيت الحكمة","المدرسة النظامية","مدرسة الكوفة"],"من أشهر النحاتين في تاريخ العراق."]]},
+
+{u:2,no:"الفصل الأول",t:"مجتمعنا العراقي",e:"🤝",
+lessons:[
+ {t:"مفهوم المجتمع ومجتمعنا العراقي",idea:"المجتمع مجموعة من الأفراد يعيشون على أرض معينة تربطهم روابط عدة أهمها الوطن، والأسرة إحدى نواة أي مجتمع.",
+  pts:["**الروابط المشتركة** التي تجمع أبناء المجتمع العراقي: **الوطن، والمصير المشترك، والأهداف المشتركة، والحضارة والمصالح المشتركة**.","**مجتمعنا العراقي** متميز عن غيره، له عادات وتقاليد وقيم مدنية مشتركة، وعاش أبناؤه **متحابين** فيما بينهم من الشمال إلى الجنوب.","يجمع أبناء العراق **وطن واحد**، دون تمييز من حيث **العرق أو القومية أو الديانة**.","لكل فرد من أبناء وطننا **الحق في ممارسة عاداته ومعتقداته وديانته**، ونرفض المفاهيم التي تعمل على تفرقة أبناء الوطن.","**مكونات المجتمع العراقي**: **العرب، الكرد، التركمان، الكلدان، الآشوريون، السريان، الأرمن، الإيزيديون، الشبك، الصابئة**.","لكل مكون **حقوق**، وعليه **واجبات** تجاه الوطن والمجتمع تتمثل بـ**الانتماء والتعاون والولاء**.","يؤمن أفراد مجتمعنا على تعدد مكوناته بجميع الحقوق والواجبات التي تجمعهم على **حب الوطن**، وأهمها **المساواة والتعاون والعدالة والتضحية**.","**التنوع** بين مكونات المجتمع العراقي من ميزات **التكامل والتعايش السلمي** بين جميع مكوناته."],
+  fact:"الانتماء للوطن والاعتزاز به قيمة يجب غرسها في الإنسان منذ صغره ليخدم بلده ويعمل على النهوض به."},
+ {t:"الأسرة جزء من المجتمع",idea:"الأسرة إحدى مكونات المجتمع الأساسية، وتتكون من الأب والأم والأبناء، وأحياناً تضم الجد والجدة وغيرهم.",
+  pts:["تتميز الأسرة بـ**علاقات مترابطة** بين أفرادها.","كلما كانت هذه العلاقات **قوية ومتماسكة** زاد ترابط الأسرة وتماسكها، وهذا يؤدي إلى **تماسك المجتمع** الذي تنتمي إليه.","لكل فرد في الأسرة **وظيفة أو عمل** يقوم به: الأب والأم والأخ والأخت.","نتعلم روح **الانتماء والولاء** للوطن، و**المساواة** بين أفراد المجتمع الواحد، و**عدم التمييز** فيما بينهم.","يلتزم كل فرد بـ**حقوقه وواجباته**.","**أتعاون** مع زملائي في الحفاظ على النظام في المدرسة والشارع.","**أساعد** جيراني وأقاربي، و**أزور** المرضى في المستشفى.","**أشارك** أصدقائي في أفراحهم وأحزانهم.","**أحترم** حقوق الآخرين ولا أعتدي عليهم."],
+  fact:"قال الإمام علي (عليه السلام): «الناس صنفان: إما أخ لك في الدين، وإما نظير لك في الخلق»."}],
+vocab:[["المجتمع","أفراد يعيشون على أرض معينة تربطهم روابط أهمها الوطن"],["الروابط المشتركة","الوطن والمصير والأهداف والحضارة والمصالح"],["المصير المشترك","مستقبل واحد يجمع أبناء الوطن"],["مكونات المجتمع","العرب والكرد والتركمان والكلدان وغيرهم"],["التعايش السلمي","عيش المكونات معاً بمحبة وسلام"],["الأسرة","الأب والأم والأبناء، نواة المجتمع"],["الانتماء","الشعور بأنك جزء من الوطن والمجتمع"],["الولاء","الإخلاص للوطن والدفاع عنه"],["المساواة","لا تمييز بين أفراد المجتمع الواحد"]],
+quiz:[
+ ["المجتمع هو:",["مجموعة من الأفراد يعيشون على أرض معينة تربطهم روابط عدة","شخص واحد يعيش وحده","مجموعة من الحيوانات","مدينة بلا سكان"],"أهم الروابط هو الوطن."],
+ ["أهم الروابط التي تربط أفراد المجتمع:",["الوطن","اللون","الطول","العمر"],"الوطن يجمع أبناءه جميعاً."],
+ ["من الروابط المشتركة التي تجمع أبناء المجتمع العراقي:",["المصير المشترك والأهداف المشتركة","اللغة الأجنبية","لون الملابس","نوع السيارة"],"والوطن والحضارة والمصالح المشتركة."],
+ ["كم رابطاً مشتركاً يجمع أبناء المجتمع العراقي في الشكل؟",["أربعة","اثنان","ستة","ثمانية"],"الوطن، المصير، الأهداف، الحضارة والمصالح."],
+ ["تعد الأسرة إحدى نواة أي مجتمع.",TF,"وبتماسكها يتماسك المجتمع."],
+ ["عاش أبناء المجتمع العراقي:",["متحابين من الشمال إلى الجنوب","متفرقين","في الشمال فقط","دون عادات"],"يجمعهم وطن واحد هو العراق."],
+ ["يجمع أبناء العراق وطن واحد دون تمييز من حيث:",["العرق والقومية والديانة","الأخلاق","احترام القانون","حب الوطن"],"كلنا عراقيون."],
+ ["لكل فرد من أفراد مجتمعنا الحق في ممارسة عاداته ومعتقداته.",TF,"وهذا من قيم مجتمعنا."],
+ ["يتألف المجتمع العراقي من مكون واحد فقط.",FT,"يتكون من مكونات عدة."],
+ ["من مكونات المجتمع العراقي:",["العرب والكرد والتركمان","الإغريق والرومان","الفراعنة","الفايكنغ"],"والكلدان والآشوريون والسريان وغيرهم."],
+ ["من مكونات المجتمع العراقي أيضاً:",["الأرمن والإيزيديون والشبك والصابئة","الفرس فقط","الإنكليز","الصينيون"],"المجتمع العراقي متنوع."],
+ ["عدد مكونات المجتمع العراقي في الشكل:",["عشرة","خمسة","ثلاثة","عشرون"],"العرب، الكرد، التركمان، الكلدان، الآشوريون، السريان، الأرمن، الإيزيديون، الشبك، الصابئة."],
+ ["واجبات كل مكون تجاه الوطن والمجتمع تتمثل بـ:",["الانتماء والتعاون والولاء","الأنانية","التفرقة","الإهمال"],"ولكل مكون حقوق أيضاً."],
+ ["أهم الحقوق والواجبات التي تجمع أفراد المجتمع العراقي:",["المساواة والتعاون والعدالة والتضحية","الظلم","التمييز","العنف"],"تجمعهم على حب الوطن."],
+ ["التنوع بين مكونات المجتمع العراقي يعد من ميزات:",["التكامل والتعايش السلمي","الخلاف","الضعف","التفرقة"],"التنوع مصدر قوة."],
+ ["حب الوطن من أهم القواسم المشتركة بين أبناء المجتمع العراقي.",TF,"من أسئلة الوحدة."],
+ ["الانتماء للوطن والاعتزاز به قيمة يجب غرسها في الإنسان:",["منذ صغره","عند كبره فقط","عند السفر فقط","لا داعي لها"],"ليخدم بلده ويعمل على النهوض به."],
+ ["تتكون الأسرة من:",["الأب والأم والأبناء","الجيران فقط","الأصدقاء","زملاء الصف"],"وأحياناً تضم الجد والجدة."],
+ ["كلما كانت العلاقات بين أفراد الأسرة قوية ومتماسكة:",["زاد تماسك المجتمع","ضعف المجتمع","تفرق الناس","لا يتغير شيء"],"الأسرة نواة المجتمع."],
+ ["ينبغي أن يكون أفراد الأسرة الواحدة متباعدين لتحقيق تماسك المجتمع.",FT,"الصحيح: متعاونين."],
+ ["من الأعمال التي تعزز القيم: أن أتعاون مع زملائي في:",["الحفاظ على النظام في المدرسة والشارع","العبث بالأثاث","الكتابة على الجدران","إزعاج الجيران"],"التعاون قيمة مهمة."],
+ ["من السلوك الحسن مع الجيران والأقارب:",["مساعدتهم وزيارة المرضى منهم","الاعتداء عليهم","إزعاجهم","عدم السؤال عنهم"],"من مجموعة نشاطات تعزز القيم."],
+ ["أشارك أصدقائي في:",["أفراحهم وأحزانهم","الأفراح فقط","لا أشاركهم","الشجار"],"هذا يعزز المحبة."],
+ ["احترام حقوق الآخرين وعدم الاعتداء عليهم:",["قيمة مدنية مهمة","سلوك خاطئ","أمر غير مهم","ضعف"],"من قيم مجتمعنا."],
+ ["قال الإمام علي (ع): «الناس صنفان: إما أخ لك في الدين وإما...»:",["نظير لك في الخلق","عدو لك","غريب عنك","بعيد عنك"],"دليل على المساواة ونبذ التمييز."],
+ ["يدل قول الإمام علي (ع) «الناس صنفان» على:",["المساواة وعدم التمييز بين الناس","التفرقة","العنصرية","التعصب"],"الناس جميعاً خلق الله."],
+ ["من القيم المدنية في الوحدة الثالثة:",["الانتماء للوطن والتعاون والمساواة","الأنانية","التعصب","الإهمال"],"وقبول التنوع والإحساس بالمسؤولية."],
+ ["قبول التنوع والاختلاف ينمي مهارة:",["الحوار","العنف","العزلة","التعصب"],"من منظومة القيم والمهارات."],
+ ["الإحساس بالمسؤولية ينمي مهارة:",["التفكير الناقد","الكسل","الإهمال","الغش"],"من منظومة القيم والمهارات."],
+ ["أداء النشيد الوطني في المدرسة يعزز:",["الانتماء وحب الوطن","الكسل","التفرقة","الإهمال"],"من نشاطات الفصل."]]},
+
+{u:2,no:"الفصل الثاني",t:"دولتنا بين الحقوق والواجبات",e:"⚖️",
+lessons:[
+ {t:"مفهوم الدولة ورموزها وسلطاتها",idea:"الدولة مجموعة من المؤسسات السياسية والاجتماعية والاقتصادية والقضائية ذات علاقات منظمة ومترابطة، تجمعها خدمة الوطن وأفراد مجتمعه.",
+  pts:["**أركان الدولة** أربعة: **الوطن، والشعب، والسلطات الاتحادية، والسيادة**.","لكل دولة اسم وشعار: اسم دولتنا **جمهورية العراق**، وشعارنا **النسر**.","**العلم**: لكل إنسان وطن ولكل وطن علم يرمز إلى **سيادته**، لذا نقف إجلالاً واحتراماً عند رفع علمنا العراقي.","**النشيد الوطني**: لكل دولة نشيدها الوطني، لذا نقف جميعاً إجلالاً واحتراماً عند الاستماع إليه.","العراق **دولة اتحادية ديمقراطية مستقلة ذات سيادة**، نظام الحكم فيها **جمهوري نيابي (برلماني) ديمقراطي اتحادي**.","**السلطة التشريعية**: مهمتها **سن القوانين** والأنظمة التي تنظم الحياة العامة، ويمثلها **مجلس النواب**.","**السلطة التنفيذية**: مهمتها **تنفيذ القوانين** التي تسنها السلطة التشريعية، ويمثلها **مجلس الوزراء**.","**السلطة القضائية**: تتميز بـ**الاستقلال التام**، مهمتها **تحقيق العدالة** بإصدار الأحكام وفق القانون، ويمثلها **مجلس القضاء الأعلى**.","تكون أنظمة الحكم للدول على أشكال منها: **النظام الجمهوري (البرلماني)** و**النظام الملكي**."],
+  fact:"من حق كل مواطن أن يعيش في ظل حكومة ديمقراطية ينتخبها المواطنون بحرية، توفر له الأمن والرفاهية والعدالة والمساواة."},
+ {t:"المواطنة وحقوق المواطن",idea:"المواطن هو الشخص الذي يعيش على أرض الدولة ويحمل جنسيتها، والمواطن الصالح هو الذي يحترم الأنظمة والقوانين والدستور.",
+  pts:["**المواطن الصالح**: عضو فعّال في بناء الدولة، له حقوق وامتيازات يكفلها له الدستور وعليه واجبات، ويسهم في تطوير وطنه بخدمته بإخلاص، ويحرص على احترام حقوق الآخرين.","**صفات المواطن الصالح**: يتفهم طبيعة قدراته وإمكاناته وواجباته وحقوقه، ويشارك في معالجة مشكلات مجتمعه، ويقدر مكانة وطنه في العالم، ويحترم حقوق الآخرين، ومتفوق ومخلص في واجباته.","**المواطنة**: صفة المواطن الذي يتمتع بالحقوق ويلتزم بالواجبات التي يفرضها عليه انتماؤه لوطنه، وهي مشتقة من **الوطن** محل الإقامة والحماية.","**1. التربية والتعليم**: تحرص دولتنا على تقديمها **مجاناً** لأبنائها التلاميذ والطلبة عبر **وزارتي التربية والتعليم العالي والبحث العلمي**.","**2. الخدمات الصحية**: تقدمها الدولة **مجاناً** عبر مؤسسات وزارة الصحة كالمستشفيات والمستوصفات ومراكز الرعاية الصحية.","**3. الأمن**: عبر الأجهزة الأمنية المتمثلة بـ**الجيش والشرطة** في **وزارتي الدفاع والداخلية**، و**الحشد الشعبي** الذي تشكّل بناءً على **فتوى الدفاع الكفائي**.","**4. خدمات أخرى**: النقل والمواصلات، والخدمات الاقتصادية والاجتماعية، والدعم والرعاية لـ**المسنين والأيتام والأرامل** من خلال **وزارة العمل والشؤون الاجتماعية**، وخدمات الإسكان والكهرباء والمالية والتجارة وغيرها."],
+  fact:"المادة (20) من دستور جمهورية العراق: للمواطنين رجالاً ونساءً حق المشاركة في الشؤون العامة والتمتع بالحقوق السياسية، بما فيها حق التصويت والانتخاب والترشيح."},
+ {t:"واجبات المواطن والحفاظ على البيئة",idea:"كما يتمتع المواطن بحقوقه، فإن عليه واجبات تجاه وطنه: حبه والتضحية في سبيله، والالتزام بالقوانين، والمحافظة على الممتلكات العامة والبيئة.",
+  pts:["**1. حب الوطن والتضحية في سبيله**: كلنا نحب الوطن الذي نعيش على أرضه وتحت سمائه، وجميعنا يعمل من أجل حماية الوطن ورفعته.","**2. الالتزام بالأنظمة والقوانين**: لتنظيم حياة المجتمع وحمايته وتحقيق العدالة والمساواة، وهناك **علاقة قوية** بين الالتزام بالأنظمة وتقدم الشعوب.","على كل واحد منا، طالباً أو معلماً أو مسؤولاً، أن يطبق النظام **بأمانة وإخلاص**، وأن نتصرف بمسؤولية وفقاً لقوانين وطننا.","**3. المحافظة على الممتلكات العامة** لأنها **ملك لجميع أفراد المجتمع**: عدم العبث بالأثاث المدرسي، والترشيد في استهلاك الماء والكهرباء، والحفاظ على الحدائق العامة والمتنزهات.","**4. الحفاظ على البيئة**: البيئة هي المكان الذي يعيش فيه الإنسان، وتشمل الأرض وما حولها من **ماء وهواء وتراب ومخلوقات حية**.","يهدد البيئة النمو السكاني المتزايد والتطور الزراعي والصناعي وعدم الالتزام بالأنظمة، ومن مخاطرها: **تلوث المياه، تلوث الهواء، تلوث التربة**.","تراكم المخلفات والنفايات بأنواعها يشكل خطراً كبيراً على الإنسان والكائنات الحية، يتمثل بانتشار **الأمراض والأوبئة**.","**لكل حق واجب**: الغذاء ← عادات صحية في الأكل، الحماية والأمان ← الالتزام بالقوانين، التعلم ← الاجتهاد والمحافظة على المدرسة، العيش في بيئة نظيفة ← المحافظة عليها من التلوث، العمل ← الإخلاص فيه."],
+  fact:"العيش في بيئة سليمة حق لكل مواطن، والمحافظة عليها واجب على كل مواطن."}],
+vocab:[["الدولة","مؤسسات منظمة تجمعها خدمة الوطن وأفراد مجتمعه"],["أركان الدولة","الوطن، الشعب، السلطات الاتحادية، السيادة"],["السيادة","استقلال الدولة في قرارها، ويرمز إليها العلم"],["السلطة التشريعية","تسن القوانين، ويمثلها مجلس النواب"],["السلطة التنفيذية","تنفذ القوانين، ويمثلها مجلس الوزراء"],["السلطة القضائية","مستقلة تحقق العدالة، يمثلها مجلس القضاء الأعلى"],["المواطن","من يعيش على أرض الدولة ويحمل جنسيتها"],["المواطن الصالح","يحترم الأنظمة والقوانين والدستور"],["المواطنة","التمتع بالحقوق والالتزام بالواجبات"],["الممتلكات العامة","ممتلكات لجميع أفراد المجتمع، كالمدارس والحدائق"],["البيئة","المكان الذي نعيش فيه بمائه وهوائه وترابه"]],
+quiz:[
+ ["الدولة هي:",["مجموعة من المؤسسات السياسية والاجتماعية والاقتصادية والقضائية","مدينة واحدة","أسرة كبيرة","سوق تجاري"],"تجمعها خدمة الوطن وأفراد مجتمعه."],
+ ["أركان قيام الدولة:",["أربعة","اثنان","ثلاثة","ستة"],"الوطن، الشعب، السلطات الاتحادية، السيادة."],
+ ["من أركان الدولة:",["الوطن والشعب والسلطات الاتحادية والسيادة","المدرسة والمسجد","الشرطة فقط","العلم والنشيد فقط"],"أركان أساسية لقيام أي دولة."],
+ ["اسم دولتنا:",["جمهورية العراق","مملكة العراق","إمارة العراق","سلطنة العراق"],"وشعارها النسر."],
+ ["شعار جمهورية العراق:",["النسر","الأسد","الحصان","النخلة"],"كما في الصورة في الكتاب."],
+ ["العلم يرمز إلى:",["سيادة الوطن","لون السماء","عدد المحافظات","المصانع"],"لذا نقف إجلالاً عند رفعه."],
+ ["عند رفع العلم العراقي يجب علينا:",["الوقوف إجلالاً واحتراماً","الجلوس","الكلام","الانصراف"],"احترام رمز الوطن."],
+ ["عند الاستماع إلى النشيد الوطني نقف إجلالاً واحتراماً.",TF,"لكل دولة نشيدها الوطني."],
+ ["نظام الحكم في العراق:",["جمهوري نيابي (برلماني) ديمقراطي اتحادي","ملكي","إمبراطوري","عسكري"],"العراق دولة اتحادية مستقلة ذات سيادة."],
+ ["العراق دولة اتحادية ديمقراطية مستقلة ذات سيادة.",TF,"كما ورد في الدستور."],
+ ["كم نوعاً من السلطات في الدستور العراقي؟",["ثلاثة","اثنان","أربعة","خمسة"],"التشريعية والتنفيذية والقضائية."],
+ ["السلطة التي مهمتها سن القوانين:",["التشريعية","التنفيذية","القضائية","الإعلامية"],"ويمثلها مجلس النواب."],
+ ["يمثل السلطة التشريعية:",["مجلس النواب","مجلس الوزراء","مجلس القضاء الأعلى","مجلس المحافظة"],"ينتخبه الشعب."],
+ ["السلطة التي مهمتها تنفيذ القوانين:",["التنفيذية","التشريعية","القضائية","الرقابية"],"ويمثلها مجلس الوزراء."],
+ ["يمثل السلطة التنفيذية:",["مجلس الوزراء","مجلس النواب","مجلس القضاء الأعلى","المحكمة"],"تنفذ ما تسنه السلطة التشريعية."],
+ ["السلطة التي تتميز بالاستقلال التام ومهمتها تحقيق العدالة:",["القضائية","التنفيذية","التشريعية","العسكرية"],"تصدر الأحكام وفق القانون."],
+ ["يمثل السلطة القضائية:",["مجلس القضاء الأعلى","مجلس النواب","مجلس الوزراء","وزارة الداخلية"],"سلطة مستقلة."],
+ ["من أشكال أنظمة الحكم للدول:",["الجمهوري (البرلماني) والملكي","الزراعي والصناعي","الشمالي والجنوبي","البري والبحري"],"معلومة للاطلاع."],
+ ["المواطن هو الشخص الذي:",["يعيش على أرض الدولة ويحمل جنسيتها","يزور الدولة سائحاً","يسكن خارجها دائماً","لا يحمل جنسية"],"والمواطن الصالح يحترم القانون."],
+ ["المواطن الصالح هو الذي:",["يحترم الأنظمة والقوانين والدستور","يخالف القوانين","يعتدي على الآخرين","يهمل واجباته"],"وهو عضو فعّال في بناء الدولة."],
+ ["من صفات المواطن الصالح:",["يحترم حقوق الآخرين ولا يتجاوز عليها","يهمل دراسته","يعبث بالممتلكات العامة","لا يهتم بمشكلات مجتمعه"],"ويكون متفوقاً ومخلصاً."],
+ ["يشارك المواطن الصالح في:",["معالجة مشكلات مجتمعه","زيادة التلوث","الإسراف في الماء","تخريب الحدائق"],"يتفهم طبيعة مشكلات مجتمعه."],
+ ["المواطنة صفة المواطن الذي:",["يتمتع بالحقوق ويلتزم بالواجبات","يتمتع بالحقوق فقط","يلتزم بالواجبات فقط","لا حقوق له"],"يفرضها عليه انتماؤه لوطنه."],
+ ["صفة المواطنة مشتقة من:",["الوطن محل الإقامة والحماية","المدينة فقط","الشارع","المدرسة"],"وتشمل الحقوق والواجبات."],
+ ["تقدم دولتنا خدمات التربية والتعليم:",["مجاناً","بأجور عالية","للأغنياء فقط","للكبار فقط"],"عبر وزارتي التربية والتعليم العالي."],
+ ["الوزارتان المسؤولتان عن التعليم:",["التربية والتعليم العالي والبحث العلمي","النفط والكهرباء","الدفاع والداخلية","التجارة والمالية"],"تقدمان التعليم مجاناً."],
+ ["تقدم الدولة الخدمات الصحية مجاناً من خلال مؤسسات وزارة:",["الصحة","النفط","الزراعة","النقل"],"كالمستشفيات والمستوصفات."],
+ ["تتمثل الأجهزة الأمنية في العراق بـ:",["الجيش والشرطة والحشد الشعبي","المعلمين","الأطباء","المزارعين"],"في وزارتي الدفاع والداخلية."],
+ ["تشكّل الحشد الشعبي بناءً على:",["فتوى الدفاع الكفائي","قرار مدرسي","طلب تجاري","رغبة فردية"],"للدفاع عن الوطن."],
+ ["الجهة المسؤولة عن حفظ الأمن في وطننا:",["الشرطة","المدرسة","المسجد","السوق"],"من أسئلة الوحدة."],
+ ["الجهة المسؤولة عن رعاية الأيتام والمسنين والأرامل هي وزارة:",["العمل والشؤون الاجتماعية","الداخلية","النقل والمواصلات","النفط"],"من الخدمات الاجتماعية."],
+ ["المادة (20) من الدستور تضمن للمواطنين رجالاً ونساءً:",["حق التصويت والانتخاب والترشيح","حق العبث بالممتلكات","حق مخالفة القوانين","حق تلويث البيئة"],"المشاركة في الشؤون العامة."],
+ ["من واجبات المواطن تجاه وطنه:",["حب الوطن والتضحية في سبيله","الإسراف في الماء","الكتابة على الجدران","إهمال الدراسة"],"وجميعنا يعمل من أجل حماية الوطن."],
+ ["الدفاع عن الوطن واجب وطني مقدس.",TF,"من أسئلة الوحدة."],
+ ["الغاية من الالتزام بالأنظمة والقوانين:",["تنظيم حياة المجتمع وحمايته وتحقيق العدالة","زيادة المشاكل","إزعاج الناس","لا فائدة منه"],"وهناك علاقة بين الالتزام بالقوانين وتقدم الشعوب."],
+ ["هناك علاقة قوية بين الالتزام بالأنظمة والقوانين و:",["تقدم الشعوب","تأخر الشعوب","زيادة التلوث","كثرة الحوادث"],"الالتزام يصنع التقدم."],
+ ["التزام التلميذ بنظام المدرسة يدل على سلوكه الحضاري.",TF,"من أسئلة الوحدة."],
+ ["التزامك بالنظام يضمن حقوقك وحقوق الآخرين.",TF,"النظام يحمي الجميع."],
+ ["الممتلكات العامة هي ملك لـ:",["جميع أفراد المجتمع","شخص واحد","الحكومة الأجنبية","لا أحد"],"لذلك يجب المحافظة عليها."],
+ ["من الممتلكات العامة:",["المدارس والمستشفيات الحكومية والحدائق العامة","المنزل","السيارة الخاصة","الدراجة الهوائية"],"أما المنزل فملك خاص."],
+ ["من الممتلكات الخاصة:",["المنزل والسيارة والدراجة الهوائية","المدارس الحكومية","الشوارع","أعمدة الكهرباء"],"تعود ملكيتها لأصحابها."],
+ ["من وسائل المحافظة على الممتلكات العامة:",["عدم العبث بالأثاث المدرسي","الكتابة على جدران المدرسة","قطع الأزهار من الحدائق","العبث بأسلاك الكهرباء"],"والترشيد في استهلاك الماء والكهرباء."],
+ ["قطع الأزهار من الحدائق العامة سلوك صحيح.",FT,"يجب المحافظة على الحدائق العامة."],
+ ["احترام عمل شرطي المرور سلوك صحيح لأنه وجد لخدمتنا.",TF,"شرطي المرور يحافظ على نظام السير."],
+ ["إذا لم يسمح سائق بمرور سيارة الإسعاف فإن سلوكه:",["غير مقبول","مقبول","لا يهم","صحيح"],"سيارة الإسعاف تنقذ الأرواح."],
+ ["البيئة هي:",["المكان الذي يعيش فيه الإنسان بمائه وهوائه وترابه ومخلوقاته","البيت فقط","المدرسة فقط","الشارع فقط"],"تشمل الأرض وما حولها."],
+ ["من أنواع التلوث التي تهدد البيئة:",["تلوث المياه والهواء والتربة","تلوث الضوء فقط","تلوث الكتب","لا يوجد تلوث"],"ثلاثة مخاطر رئيسة."],
+ ["دخان المصانع الكثيف يسبب:",["تلوث الهواء","تلوث التربة","نظافة البيئة","زيادة الأمطار"],"من صور الكتاب."],
+ ["رمي النفايات في الأنهار يسبب:",["تلوث المياه","تلوث الهواء فقط","نظافة النهر","زيادة الأسماك"],"يجب المحافظة على الأنهار."],
+ ["يؤدي تراكم النفايات والمخلفات إلى:",["انتشار الأمراض والأوبئة","تحسن الصحة","نظافة الشوارع","زيادة الأشجار"],"خطر على جميع الكائنات الحية."],
+ ["من أسباب المخاطر التي تهدد البيئة:",["النمو السكاني والتطور الصناعي وعدم الالتزام بالأنظمة","زراعة الأشجار","تنظيف الشوارع","ترشيد الماء"],"ظهرت مشكلات تهدد حياة الإنسان."],
+ ["العيش في بيئة سليمة حق لكل:",["مواطن","مسؤول فقط","غني فقط","كبير فقط"],"والمحافظة عليها واجب."],
+ ["حقي في التعلم يقابله واجب:",["الاجتهاد في دراستي والمحافظة على مدرستي","الغياب","تمزيق الكتب","إهمال الواجبات"],"لكل حق واجب."],
+ ["حقي في الحصول على الحماية والأمان يقابله واجب:",["الالتزام بالأنظمة والقوانين","مخالفة القوانين","إزعاج الجيران","العبث بالممتلكات"],"من جدول حقوقي وواجباتي."],
+ ["حقي في الحصول على العمل يقابله واجب:",["الإخلاص في عملي والاجتهاد فيه","الكسل","الغياب","الغش"],"المواطن المنتج يبني وطنه."],
+ ["تمزيق زميلك لكتابه المدرسي سلوك:",["غير مقبول","مقبول","صحيح","مفيد"],"الكتاب من الممتلكات التي يجب المحافظة عليها."]]}
+];
+
+const FIGS={"1a": [["c1a_1.jpg", "خريطة موقع العراق من العالم"], ["c1a_2.jpg", "موقع العراق من الدول العربية والدول المجاورة"], ["c1a_3.jpg", "خريطة العراق الإدارية"], ["c1a_4.jpg", "مرقد الإمام العباس (عليه السلام) في كربلاء"], ["c1a_5.jpg", "شارع المتنبي في بغداد"], ["c1a_6.jpg", "أسد بابل"], ["c1a_7.jpg", "شلال كلي علي بيك"]], "1b": [["c1b_1.jpg", "خطوط الطول"], ["c1b_2.jpg", "دوائر العرض"], ["c1b_3.jpg", "العراق بين خطوط الطول ودوائر العرض"], ["c1b_4.jpg", "الدول العربية في قارتي آسيا (الأخضر) وأفريقيا (الأصفر)"]], "2a": [["c2a_1.jpg", "خريطة تضاريس العراق"], ["c2a_2.jpg", "سهل السندي"], ["c2a_3.jpg", "سلسلة جبال حصاروست"], ["c2a_4.jpg", "تلال مكحول"], ["c2a_5.jpg", "تلال حمرين"], ["c2a_6.jpg", "نهر دجلة في بغداد (السهل الرسوبي)"], ["c2a_7.jpg", "إحدى مناطق الهضبة الغربية"], ["c2a_8.jpg", "صناعة الإسمنت"], ["c2a_9.jpg", "من شلالات المنطقة الجبلية"], ["c2a_10.jpg", "جانب من أهوار محافظة ذي قار"], ["c2a_11.jpg", "الأهوار في جنوب العراق"]], "2b": [["c2b_1.jpg", "درجات الحرارة في فصل الشتاء"], ["c2b_2.jpg", "درجات الحرارة في فصل الصيف"], ["c2b_3.jpg", "المجموع الكلي لسقوط الأمطار في العراق"], ["c2b_4.jpg", "الأقاليم المناخية في العراق"], ["c2b_5.jpg", "النبات الطبيعي في العراق"], ["c2b_6.jpg", "من النبات الطبيعي في العراق"], ["c2b_7.jpg", "نبات صحراوي يتحمل الجفاف"]], "2c": [["c2c_1.jpg", "الموارد المائية في العراق"], ["c2c_2.jpg", "نهر دجلة"], ["c2c_3.jpg", "نهر الفرات"], ["c2c_4.jpg", "شط العرب"], ["c2c_5.jpg", "بحيرة دوكان"], ["c2c_6.jpg", "استخدام الوسائل الحديثة في الزراعة"], ["c2c_7.jpg", "المحافظة على الأنهار من التلوث"], ["c2c_8.jpg", "ترشيد استهلاك المياه"]], "3a": [["c3a_1.jpg", "توزيع الكثافة السكانية في العراق"], ["c3a_2.jpg", "حصاد الحبوب"], ["c3a_3.jpg", "بساتين الحمضيات"], ["c3a_4.jpg", "الأبقار"], ["c3a_5.jpg", "الدواجن"], ["c3a_6.jpg", "الأغنام"]], "3b": [["c3b_1.jpg", "من منشآت النفط في العراق"], ["c3b_2.jpg", "مصفى لتكرير النفط"], ["c3b_3.jpg", "من مصانع العراق"], ["c3b_4.jpg", "صناعة الغزل والنسيج"], ["c3b_5.jpg", "الصناعات المعدنية"]], "3c": [["c3c_1.jpg", "السفن والموانئ"], ["c3c_2.jpg", "النقل الجوي"], ["c3c_3.jpg", "النقل البري بالحافلات"], ["c3c_4.jpg", "القطارات والسكك الحديد"]], "4a": [["c4a_1.jpg", "خريطة بلاد الرافدين"], ["c4a_2.jpg", "القيثارة السومرية"], ["c4a_3.jpg", "كنوز سومرية"], ["c4a_4.jpg", "الملك سرجون الأكدي"], ["c4a_5.jpg", "برج بابل (الحضارة البابلية)"], ["c4a_6.jpg", "الثور المجنح (الحضارة الآشورية)"], ["c4a_7.jpg", "الرُّقُم الطينية"], ["c4a_8.jpg", "الأختام الأسطوانية"], ["c4a_9.jpg", "الكتابة المسمارية"]], "4b": [["c4b_1.jpg", "حمورابي يتسلم الشرائع من إله الشمس"], ["c4b_2.jpg", "مسلة حمورابي"], ["c4b_3.jpg", "بوابة عشتار"], ["c4b_4.jpg", "زقورة أور"], ["c4b_5.jpg", "ملك سومري يحمل سلة الطين لبناء أحد المعابد"], ["c4b_6.jpg", "معبد في مدينة الحضر"], ["c4b_7.jpg", "تماثيل عراقية قديمة"], ["c4b_8.jpg", "أبناء طائفة الصابئة المندائيين يمارسون شعائرهم الدينية"]], "5a": [["c5a_1.jpg", "مسجد الكوفة"], ["c5a_2.jpg", "مرقد هاني بن عروة (رضي الله عنه) في الكوفة"], ["c5a_3.jpg", "بقايا دار الإمارة في الكوفة"], ["c5a_4.jpg", "الخط الكوفي"]], "5b": [["c5b_1.jpg", "مخطط مدينة بغداد المدورة، ومنظر تخيلي لأحد شوارعها"], ["c5b_2.jpg", "مرقد الإمامين الكاظمين (عليهما السلام)"], ["c5b_3.jpg", "مرقد الإمام الأعظم أبي حنيفة النعمان (رضي الله عنه)"], ["c5b_4.jpg", "جامع الخلفاء"], ["c5b_5.jpg", "الباب الوسطاني لمدينة بغداد القديمة"]], "5c": [["c5c_1.jpg", "المئذنة الملوية"], ["c5c_2.jpg", "بقايا قصور سامراء القديمة"], ["c5c_3.jpg", "مرقد الإمامين العسكريين (عليهما السلام)"], ["c5c_4.jpg", "الجامع الكبير في سامراء"]], "6a": [["c6a_1.jpg", "المدرسة المستنصرية"], ["c6a_2.jpg", "رقيم طيني يمثل نظرية رياضية"], ["c6a_3.jpg", "مخطوطات عربية"], ["c6a_4.jpg", "طبيب عراقي يصف دواءً، من مخطوطة عربية إسلامية"], ["c6a_5.jpg", "علم النبات عند العرب المسلمين"]], "6b": [["c6b_1.jpg", "خزائن الكتب القديمة"], ["c6b_2.jpg", "شعار بيت الحكمة المعاصر"], ["c6b_3.jpg", "مخطوطة تراثية"], ["c6b_4.jpg", "إحدى كنائس بغداد"]], "6c": [["c6c_1.jpg", "جابر بن حيان"], ["c6c_2.jpg", "الإسطرلاب"], ["c6c_3.jpg", "ابن الهيثم"], ["c6c_4.jpg", "تشريح العين عند ابن الهيثم"], ["c6c_5.jpg", "قوس قزح وألوانه"], ["c6c_6.jpg", "كتابا مروج الذهب والتنبيه والإشراف للمسعودي"], ["c6c_7.jpg", "الشاعر محمد مهدي الجواهري"], ["c6c_8.jpg", "بدر شاكر السياب"], ["c6c_9.jpg", "نازك الملائكة"], ["c6c_10.jpg", "د. عبد الجبار عبد الله"], ["c6c_11.jpg", "المعمارية زها حديد"], ["c6c_12.jpg", "نصب الحرية للفنان جواد سليم"]], "7a": [["c7a_1.jpg", "أهم الروابط المشتركة التي تجمع أبناء المجتمع العراقي"], ["c7a_2.jpg", "مكونات المجتمع العراقي"]], "8a": [["c8a_1.jpg", "أركان الدولة"], ["c8a_2.jpg", "شعار جمهورية العراق: النسر"], ["c8a_3.jpg", "علم العراق"]], "8b": [["c8b_1.jpg", "من حقي أن أتعلم"], ["c8b_2.jpg", "من حقي الرعاية الصحية"], ["c8b_3.jpg", "الأجهزة الأمنية تحمي الوطن"], ["c8b_4.jpg", "خدمات النقل والمواصلات"], ["c8b_5.jpg", "مواطن منتج"]], "8c": [["c8c_1.jpg", "حب الوطن والتضحية في سبيله"], ["c8c_2.jpg", "الالتزام بالأنظمة والقوانين"], ["c8c_3.jpg", "تلوث الهواء"], ["c8c_4.jpg", "تلوث المياه"], ["c8c_5.jpg", "تلوث التربة"], ["c8c_6.jpg", "نحافظ على حديقة مدرستنا"]]};
+const WIDE=new Set(["c1a_1.jpg", "c1a_2.jpg", "c1a_3.jpg", "c1b_3.jpg", "c1b_4.jpg", "c2a_1.jpg", "c2b_3.jpg", "c2b_4.jpg", "c2b_5.jpg", "c2c_1.jpg", "c3a_1.jpg", "c4a_1.jpg", "c4b_8.jpg", "c5b_1.jpg", "c5c_4.jpg", "c6a_1.jpg", "c6c_2.jpg", "c6c_12.jpg", "c7a_1.jpg", "c7a_2.jpg", "c8a_1.jpg"]);
+
+/* ---------- theme ---------- */
+const TKEY="soc5-theme";
+function isDark(){const t=document.documentElement.dataset.theme;return t?t==="dark":matchMedia("(prefers-color-scheme: dark)").matches}
+function setTheme(t){document.documentElement.dataset.theme=t;try{localStorage.setItem(TKEY,t)}catch(e){}}
+try{const t=localStorage.getItem(TKEY);if(t==="dark"||t==="light")document.documentElement.dataset.theme=t}catch(e){}
+
+/* ---------- install ---------- */
+const SITE="https://alialsaffarmosuluniversity.github.io/AHT/";
+let deferredPrompt=null;
+const isStandalone=()=>matchMedia("(display-mode: standalone)").matches||navigator.standalone===true;
+const onSite=()=>location.hostname.endsWith("github.io");
+addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredPrompt=e});
+addEventListener("appinstalled",()=>{deferredPrompt=null;document.querySelectorAll(".needinstall").forEach(el=>el.hidden=true)});
+try{if("serviceWorker" in navigator&&onSite())navigator.serviceWorker.register("sw.js").catch(()=>{})}catch(e){}
+function device(){
+  const ua=navigator.userAgent;
+  if(/iPhone|iPad|iPod/.test(ua)||(/Macintosh/.test(ua)&&navigator.maxTouchPoints>1))return"ios";
+  if(/Android/.test(ua))return"android";
+  if(/Macintosh/.test(ua)&&/Safari/.test(ua)&&!/Chrome|Edg|Firefox/.test(ua))return"mac";
+  return"desktop";
+}
+const STEPS={
+ ios:["آيفون وآيباد",["افتح موقع التطبيق في متصفح سفاري.","اضغط زر المشاركة (مربع يخرج منه سهم للأعلى).<span class='en'>Share</span>","اختر «إضافة إلى الشاشة الرئيسية».<span class='en'>Add to Home Screen</span>","اضغط «إضافة».<span class='en'>Add</span>"]],
+ android:["أندرويد",["افتح موقع التطبيق في متصفح كروم.","اضغط النقاط الثلاث أعلى الشاشة ⋮.","اختر «تثبيت التطبيق» أو «إضافة إلى الشاشة الرئيسية».<span class='en'>Install app</span>","اضغط «تثبيت».<span class='en'>Install</span>"]],
+ desktop:["حاسوب ويندوز أو لينكس أو كروم بوك",["افتح موقع التطبيق في متصفح كروم أو إيدج.","اضغط أيقونة التثبيت في نهاية شريط العنوان، أو افتح القائمة ⋮.","اختر «تثبيت رحلة الاجتماعيات».<span class='en'>Install</span>"]],
+ mac:["حاسوب ماك",["افتح موقع التطبيق في متصفح سفاري.","من قائمة «ملف» اختر «إضافة إلى Dock».<span class='en'>File › Add to Dock</span>","أو استعمل متصفح كروم واتبع خطوات الحاسوب."]]
+};
+function installHelp(){
+  const d=device(),order=[d,...Object.keys(STEPS).filter(k=>k!==d)];
+  const list=k=>`<ol class="steps">${STEPS[k][1].map(x=>`<li>${x}</li>`).join("")}</ol>`;
+  const box=document.createElement("div");box.className="sheet";box.setAttribute("role","dialog");box.setAttribute("aria-label","تثبيت التطبيق");
+  box.innerHTML=`<div class="sheet-in"><h3>📲 ثبّت رحلة الاجتماعيات</h3>
+   ${onSite()?"":`<p style="margin:0">التثبيت يعمل من موقع التطبيق. افتح هذا الرابط أولاً:</p><div class="siteurl">${SITE}</div><div class="row"><a class="btn" href="${SITE}" target="_blank" rel="noopener" style="text-decoration:none">افتح موقع التطبيق</a><button class="btn ghost" id="cpy">نسخ الرابط</button></div>`}
+   <p style="margin:0;font-family:var(--display);font-weight:700">خطوات ${STEPS[d][0]}:</p>${list(d)}
+   ${order.slice(1).map(k=>`<details><summary>${STEPS[k][0]}</summary>${list(k)}</details>`).join("")}
+   <p style="margin:0;color:var(--muted);font-size:.95rem">بعد التثبيت يظهر التطبيق بأيقونته بين تطبيقاتك، ويعمل دون إنترنت.</p>
+   <button class="btn" id="cls">حسناً</button></div>`;
+  box.onclick=e=>{if(e.target===box)box.remove()};
+  document.body.appendChild(box);
+  box.querySelector("#cls").onclick=()=>box.remove();
+  const c=box.querySelector("#cpy");
+  if(c)c.onclick=()=>{const done=()=>{c.textContent="تم النسخ ✓"};
+    try{navigator.clipboard.writeText(SITE).then(done,()=>{selectUrl(box)})}catch(e){selectUrl(box)}};
+  box.querySelector("#cls").focus();
+}
+function selectUrl(box){const el=box.querySelector(".siteurl");const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r)}
+function install(){
+  if(deferredPrompt){deferredPrompt.prompt();deferredPrompt.userChoice.finally(()=>{deferredPrompt=null});return}
+  installHelp();
+}
+
+/* ---------- visitors counter ---------- */
+const CNT="https://abacus.jasoncameron.dev",NS="alialsaffarmosuluniversity-aht";
+let stats=null;
+function flag(store,k){try{if(store.getItem(k))return true;store.setItem(k,"1")}catch(e){}return false}
+async function loadStats(){
+  if(!onSite())return;
+  try{
+    const newVisitor=!flag(localStorage,"soc5-visitor"),newVisit=!flag(sessionStorage,"soc5-visit");
+    const get=async(key,hit)=>{const r=await fetch(`${CNT}/${hit?"hit":"get"}/${NS}/${key}`);if(!r.ok)throw 0;return (await r.json()).value};
+    const [v,o]=await Promise.all([get("visitors",newVisitor),get("visits",newVisit)]);
+    stats={v,o};paintStats();
+  }catch(e){}
+}
+const fmt=n=>Number(n).toLocaleString("ar-IQ");
+function paintStats(){const el=document.getElementById("visits");if(!el||!stats)return;
+  el.innerHTML=`<span class="vchip">👥 عدد الزوار <b>${fmt(stats.v)}</b></span><span class="vchip">👁️ مرات الفتح <b>${fmt(stats.o)}</b></span>`;el.hidden=false}
+
+/* ---------- state ---------- */
+const POOL=CH.reduce((s,c)=>s+c.quiz.length,0);
+const KEY="soc5-best-v1";
+let best={};
+try{best=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){best={}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(best))}catch(e){}}
+const starsOf=p=>p>=0.9?3:p>=0.7?2:p>=0.5?1:0;
+const totalStars=()=>CH.reduce((s,_,i)=>s+(best[i]||0),0);
+const col=i=>{const k=UNITS[CH[i].u].k;return `--c:var(--${k});--cs:var(--${k}s)`};
+const md=s=>s.replace(/\*\*(.+?)\*\*/g,"<b>$1</b>");
+const starRow=n=>[0,1,2].map(i=>`<span class="${i<n?'on':'off'}">★</span>`).join("");
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const app=document.getElementById("app"),bar=document.getElementById("bar");
+const LETTERS=["أ","ب","ج","د"];
+const logo=`<svg class="logo" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="19" fill="var(--u3s)" stroke="var(--u3)" stroke-width="3"/><path d="M24 5c-6 6-6 32 0 38M24 5c6 6 6 32 0 38M6 18h36M6 30h36" fill="none" stroke="var(--u3)" stroke-width="2"/><path d="M15 13c4 1 6 4 5 7s-5 3-6 6 1 6-2 7c-3-3-4-8-3-12 1-3 3-6 6-8z" fill="var(--u1)"/><circle cx="31" cy="27" r="3.4" fill="var(--u2)"/></svg>`;
+
+function topBar(back){
+  bar.innerHTML=(back?`<button class="back" id="bk" aria-label="رجوع">→ رجوع</button>`:logo)+
+   `<h1><span class="w1">رحلة </span>الاجتماعيات<small>اجتماعيات الصف الخامس الابتدائي</small></h1>
+    ${isStandalone()?"":`<button class="themebtn needinstall" id="ins" aria-label="تثبيت التطبيق" title="تثبيت التطبيق">📲</button>`}
+    <button class="themebtn" id="thm" aria-label="الوضع الليلي أو النهاري">${isDark()?"☀️":"🌙"}</button>
+    <span class="starpill" title="مجموع النجوم"><b>★</b> ${totalStars()} / ${CH.length*3}</span>`;
+  if(back)document.getElementById("bk").onclick=back;
+  const ib=document.getElementById("ins");if(ib)ib.onclick=install;
+  document.getElementById("thm").onclick=()=>{setTheme(isDark()?"light":"dark");topBar(back)};
+}
+
+/* ---------- home ---------- */
+function home(){
+  topBar(null);
+  const t=totalStars(),max=CH.length*3;
+  const msg=t===0?"اختر فصلاً، اقرأ الملخص، ثم اختبر نفسك واجمع النجوم.":t<max/2?"بداية رائعة! استمر في جمع النجوم.":t<max?"أنت قريب من القمة، يا مستكشف!":"أكملت كل النجوم. أنت مستكشف حقيقي!";
+  let h=`<section class="hello pop"><div class="big">🌍</div><div style="flex:1;min-width:0"><h2>أهلاً بالمستكشف الصغير!</h2><p>${msg}</p><div class="meter"><i style="width:${t/max*100}%"></i></div></div></section>`;
+  UNITS.forEach((u,ui)=>{
+    h+=`<section class="unit" style="--c:var(--${u.k});--cs:var(--${u.k}s)"><div class="unit-h"><span class="tag">${u.n}</span><h2>${u.t}</h2></div><div class="chs">`;
+    CH.forEach((c,i)=>{if(c.u!==ui)return;
+      h+=`<button class="ch" data-i="${i}" style="${col(i)}"><span class="em">${c.e}</span><span class="tx"><span class="no">${c.no}</span><h3>${c.t}</h3><span class="stars">${starRow(best[i]||0)}</span></span></button>`});
+    h+=`</div></section>`;
+  });
+  if(!isStandalone())h+=`<section class="installcard needinstall"><span class="em">📲</span><span><h3>ثبّت التطبيق على جهازك</h3><p>على الهاتف أو الآيباد أو الحاسوب، ويعمل دون إنترنت.</p></span><button class="btn" id="insHome">تثبيت التطبيق</button></section>`;
+  h+=`<button class="challenge" id="chal"><span class="em">🏆</span><span><h3>تحدي البطل</h3><p>20 سؤالاً من كل الكتاب (${POOL} سؤالاً)</p></span><span class="go">ابدأ</span></button>`;
+  h+=`<div class="visits" id="visits" hidden></div>`;
+  h+=`<p class="foot">مبني على كتاب الاجتماعيات للصف الخامس الابتدائي، الطبعة الثانية عشرة 1447هـ / 2025م</p>`;
+  app.innerHTML=h;
+  app.querySelectorAll(".ch").forEach(b=>b.onclick=()=>chapter(+b.dataset.i,"sum"));
+  document.getElementById("chal").onclick=challenge;
+  const ih=document.getElementById("insHome");if(ih)ih.onclick=install;
+  paintStats();
+  scrollTo(0,0);
+}
+
+/* ---------- chapter ---------- */
+function chapter(i,tab){
+  const c=CH[i];topBar(home);
+  app.setAttribute("style",col(i));
+  app.innerHTML=`<section class="hero"><span class="em">${c.e}</span><div><div class="no">${c.no} · ${UNITS[c.u].t}</div><h2>${c.t}</h2><div class="stars" style="font-size:1.2rem">${starRow(best[i]||0).replace(/class="off"/g,'style="opacity:.35"').replace(/class="on"/g,'style="color:var(--on-c)"')}</div></div></section>
+  <div class="tabs" role="tablist">
+   <button class="tab" role="tab" data-t="sum"><span class="ic">📖</span>الملخص</button>
+   <button class="tab" role="tab" data-t="fc"><span class="ic">🃏</span>بطاقات الكلمات</button>
+   <button class="tab" role="tab" data-t="quiz"><span class="ic">✏️</span>الاختبار</button>
+  </div><div id="pane"></div>`;
+  const set=t=>{app.querySelectorAll(".tab").forEach(b=>b.setAttribute("aria-selected",b.dataset.t===t));
+    ({sum:summary,fc:cards,quiz:quizStart})[t](i)};
+  app.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{set(b.dataset.t);app.querySelector(".tabs").scrollIntoView({block:"start"});scrollBy(0,-80)});
+  set(tab);scrollTo(0,0);
+}
+const pane=()=>document.getElementById("pane");
+
+function summary(i){
+  const c=CH[i];
+  pane().innerHTML=`<div style="display:flex;flex-direction:column;gap:16px">`+c.lessons.map((l,k)=>`
+   <article class="lesson pop"><div class="lesson-h"><span class="n">الدرس ${["الأول","الثاني","الثالث"][k]}</span><h3>${l.t}</h3></div>
+   <div class="idea"><b class="lb">💡 الفكرة الرئيسة</b>${l.idea}</div>
+   ${(FIGS[(i+1)+"abc"[k]]||[]).length?`<div class="figs">${FIGS[(i+1)+"abc"[k]].map(f=>`<button class="fig${WIDE.has(f[0])?" wide":""}" data-src="img/${f[0]}" data-cap="${f[1]}"><img src="img/${f[0]}" alt="${f[1]}" loading="lazy"><figcaption>${f[1]}</figcaption></button>`).join("")}</div>`:""}
+   <ul class="pts">${l.pts.map(p=>`<li><span>${md(p)}</span></li>`).join("")}</ul>
+   <div class="fact"><b class="lb">🤩 هل تعلم؟ </b>${l.fact}</div></article>`).join("")+
+   `<div class="cta row"><button class="btn ghost" id="toFc">🃏 راجع الكلمات</button><button class="btn" id="toQ">✏️ اختبر نفسك</button></div></div>`;
+  pane().querySelectorAll(".fig").forEach(b=>b.onclick=()=>zoom(b.dataset.src,b.dataset.cap));
+  document.getElementById("toFc").onclick=()=>chapter(i,"fc");
+  document.getElementById("toQ").onclick=()=>chapter(i,"quiz");
+}
+
+function zoom(src,cap){
+  const d=document.createElement("div");d.className="lbox";d.setAttribute("role","dialog");
+  d.innerHTML=`<img src="${src}" alt="${cap}"><p>${cap}</p><button>✕ إغلاق</button>`;
+  d.onclick=()=>d.remove();document.body.appendChild(d);d.querySelector("button").focus();
+}
+function cards(i){
+  const v=CH[i].vocab;let k=0;
+  pane().innerHTML=`<div class="fc-wrap"><p class="fc-hint">اقرأ الكلمة وتذكّر معناها، ثم اضغط على البطاقة لتقلبها.</p>
+   <button class="fc" id="fc" aria-label="اقلب البطاقة"><div class="fc-in"><div class="face front"><span class="w" id="fw"></span><span class="s">اضغط لترى المعنى</span></div><div class="face back-f" id="fb"></div></div></button>
+   <div class="fc-nav"><button class="btn ghost" id="pv" aria-label="السابقة">→</button><span class="fc-count" id="fn"></span><button class="btn ghost" id="nx" aria-label="التالية">←</button></div>
+   <button class="btn" id="toQ">✏️ أنا جاهز للاختبار</button></div>`;
+  const fc=document.getElementById("fc");
+  const show=()=>{fc.classList.remove("flip");setTimeout(()=>{document.getElementById("fw").textContent=v[k][0];document.getElementById("fb").textContent=v[k][1];},fc.classList.contains("flip")?0:120);document.getElementById("fn").textContent=`${k+1} / ${v.length}`};
+  document.getElementById("fw").textContent=v[0][0];document.getElementById("fb").textContent=v[0][1];
+  document.getElementById("fn").textContent=`1 / ${v.length}`;
+  fc.onclick=()=>fc.classList.toggle("flip");
+  document.getElementById("nx").onclick=()=>{k=(k+1)%v.length;show()};
+  document.getElementById("pv").onclick=()=>{k=(k-1+v.length)%v.length;show()};
+  document.getElementById("toQ").onclick=()=>chapter(i,"quiz");
+}
+
+/* ---------- quiz engine ---------- */
+function runQuiz(qs,onDone,root){
+  let n=0,score=0;const wrong=[];
+  const step=()=>{
+    const [q,opts,x]=qs[n];const right=opts[0];const sh=opts.length===2?["صح","خطأ"]:shuffle(opts);
+    root.innerHTML=`<div class="qbox pop"><div class="qtop"><span>سؤال ${n+1} من ${qs.length}</span><span class="sc">✔ ${score}</span></div>
+     <div class="qbar"><i style="width:${n/qs.length*100}%"></i></div>
+     <div class="q">${q}</div><div class="opts">${sh.map((o,j)=>`<button class="opt" data-o="${j}"><span class="k">${LETTERS[j]}</span><span>${o}</span></button>`).join("")}</div>
+     <div id="fbk"></div></div>`;
+    root.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{
+      const pick=sh[+b.dataset.o],ok=pick===right;
+      root.querySelectorAll(".opt").forEach(o=>{o.disabled=true;if(sh[+o.dataset.o]===right)o.classList.add("right")});
+      if(ok)score++;else{b.classList.add("wrong");wrong.push([q,right])}
+      const praise=["أحسنت! 🌟","رائع! 🎉","ممتاز يا بطل! 💪","إجابة مستكشف! 🧭","صحيح! 👏"];
+      document.getElementById("fbk").innerHTML=`<div class="fb ${ok?'good':'bad'}"><b>${ok?praise[Math.floor(Math.random()*praise.length)]:"لا بأس، تعلّم معي 🙂"}</b>${ok?(x||"إجابتك صحيحة."):"الإجابة الصحيحة: <strong>"+right+"</strong>. "+(x||"")}</div>
+       <div class="qnext" style="margin-top:12px"><button class="btn" id="nxq">${n+1<qs.length?"السؤال التالي ←":"النتيجة 🏁"}</button></div>`;
+      const nb=document.getElementById("nxq");nb.focus({preventScroll:true});
+      nb.onclick=()=>{n++;if(n<qs.length){step();root.scrollIntoView({block:"start"});scrollBy(0,-150)}else onDone(score,wrong)};
+    });
+  };
+  step();
+}
+
+function resultCard(score,total,wrong,again,label){
+  const p=score/total,st=starsOf(p);
+  const t=st===3?["🏆","عبقري صغير!"]:st===2?["🌟","عمل رائع!"]:st===1?["👍","جيد، تستطيع أكثر!"]:["📚","راجع الملخص وحاول مجدداً"];
+  if(st>=2)confetti();
+  return `<div class="qbox result pop"><div class="big">${t[0]}</div><h3>${t[1]}</h3><div class="rs">${starRow(st)}</div>
+   <div class="num">${score} من ${total} إجابة صحيحة</div>
+   <div class="row"><button class="btn" id="again">🔁 ${label||"أعد الاختبار"}</button><button class="btn ghost" id="gohome">🏠 الفصول</button></div>
+   ${wrong.length?`<div class="review"><h4>راجع هذه الأسئلة:</h4>${wrong.map(w=>`<div class="rv">${w[0]}<br><span class="a">✔ ${w[1]}</span></div>`).join("")}</div>`:""}</div>`;
+}
+
+function quizStart(i){
+  const root=pane(),all=CH[i].quiz.length;
+  root.innerHTML=`<div class="qbox pop" style="text-align:center;align-items:center"><div style="font-size:2.6rem">✏️</div>
+   <h3 style="font-size:1.4rem">كم سؤالاً تريد؟</h3><p style="margin:0;color:var(--muted)">في هذا الفصل ${all} سؤالاً. تظهر الأسئلة بترتيب مختلف كل مرة.</p>
+   <div class="row"><button class="btn ghost" data-n="10">10 أسئلة</button><button class="btn ghost" data-n="25">25 سؤالاً</button><button class="btn" data-n="${all}">كل الأسئلة (${all})</button></div></div>`;
+  root.querySelectorAll("[data-n]").forEach(b=>b.onclick=()=>quizRun(i,+b.dataset.n));
+}
+function quizRun(i,n){
+  const root=pane();const qs=shuffle(CH[i].quiz).slice(0,n);
+  runQuiz(qs,(score,wrong)=>{
+    const st=starsOf(score/qs.length);
+    if(st>(best[i]||0)){best[i]=st;save()}
+    topBar(home);
+    root.innerHTML=resultCard(score,qs.length,wrong);
+    document.getElementById("again").onclick=()=>quizStart(i);
+    document.getElementById("gohome").onclick=home;
+    root.scrollIntoView({block:"start"});scrollBy(0,-150);
+  },root);
+}
+
+function challenge(){
+  topBar(home);app.setAttribute("style","--c:var(--btn);--cs:var(--btn-soft)");
+  const pool=[];CH.forEach(c=>c.quiz.forEach(q=>pool.push(q)));
+  const qs=shuffle(pool).slice(0,20);
+  app.innerHTML=`<section class="hero chal"><span class="em">🏆</span><div><div class="no">من كل الفصول</div><h2>تحدي البطل</h2></div></section><div id="pane"></div>`;
+  const root=pane();
+  runQuiz(qs,(score,wrong)=>{
+    root.innerHTML=resultCard(score,qs.length,wrong,null,"تحدٍّ جديد");
+    document.getElementById("again").onclick=challenge;
+    document.getElementById("gohome").onclick=home;
+  },root);
+  scrollTo(0,0);
+}
+
+function confetti(){
+  if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+  const box=document.createElement("div");box.className="confetti";
+  const cs=["var(--u1)","var(--u2)","var(--u3)","var(--u4)","var(--u5)","var(--gold)"];
+  for(let k=0;k<60;k++){const i=document.createElement("i");i.style.left=Math.random()*100+"%";i.style.background=cs[k%cs.length];i.style.animationDelay=Math.random()*.6+"s";i.style.transform=`rotate(${Math.random()*180}deg)`;box.appendChild(i)}
+  document.body.appendChild(box);setTimeout(()=>box.remove(),2800);
+}
+
+const _home=home;home=function(){app.removeAttribute("style");_home()};
+home();
+loadStats();
+</script>
+
+</body></html>
